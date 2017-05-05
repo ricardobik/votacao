@@ -1,0 +1,22 @@
+{
+	"usuario": [
+		{
+			"nome": "ricardo rodrigo teixeira",
+			"cpf": 22211336688,
+			"senha": "olha lá",
+			"id": 4
+    	}
+  ],
+	"pessoa": [
+		{
+			"nome": "ricardo rodrigo teixeira",
+			"cpf": 22211336688,
+			"foto": "",
+			"candidato": "true",
+			"eleitor": "true",
+			"responsavel": "true",
+			"id": 4
+    	}
+  ]
+
+}

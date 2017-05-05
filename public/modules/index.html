@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import qunit.css-->
+	<link type="text/css" rel="stylesheet" href="https://code.jquery.com/qunit/qunit-git.css" media="screen,projection" />
+	<!--Import materialize.css-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+	<!--Import SweetAlert with google style-->
+	<link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+	<!--    <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />-->
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+	<!-- Import Navbar -->
+	<div id="nav-bar"></div>
+
+	<div class="container">
+		<div class="row center">
+			<div class="col s12 m6">
+				<div class="card hoverable">
+					<div class="card-image">
+						<img src="../img/pessoas.jpg">
+						<span class="card-title">Pessoa</span>
+					</div>
+					<div class="card-content">
+
+						<p>Cadastre, localize e edite todos os elementos necessários para as votações.</p>
+					</div>
+					<div class="card-action">
+						<a href="pessoa/create.html">Adicionar</a>
+						<a href="pessoa/search.html">Localizar</a>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col s12 m6">
+				<div class="card hoverable">
+					<div class="card-image">
+						<img src="../img/votacao.jpg">
+						<span class="card-title">Votação</span>
+					</div>
+					<div class="card-content">
+
+						<p>Cadastre, localize e incremente a votação com os candidatos, eleitores e responsáveis por cada uma.</p>
+					</div>
+					<div class="card-action">
+						<a href="{{ URL::route('votacao.create') }}">Adicionar</a>
+						<a href="{{ URL::route('votacao.index') }}">Localizar</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<!--Import jQuery before materialize.js-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!--    <script type="text/javascript" src="/js/bin/materialize.min.js"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
+
+	<!--Import JUnit tests-->
+	<script type="text/javascript" src="https://code.jquery.com/qunit/qunit-2.1.1.js"></script>
+
+	<script type="text/javascript" src="/js/bin/general.js"></script>
+
+
+	<script>
+		$(document).ready(function() {
+
+			//Load Navbar and dropdown menu
+			$('#nav-bar').load("/modules/layout/navbar.html", function() {
+				$(".button-collapse").sideNav();
+				$('.dropdown-button').dropdown();
+				$("#brasao").attr("src", imageUrl + "brasao_branco.png");
+			});
+
+		});
+
+	</script>
+
+</body>
+
+</html>

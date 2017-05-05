@@ -1,0 +1,9 @@
+{
+    "/blog/:resource/:id/show": "/:resource/:id",
+    "/blog/:category": "/posts/:id?category=:category",
+
+
+
+    "/veiculos/:resource/:id/show": "/:resource/:id",
+    "/blog/:category": "/posts/:id?category=:category"
+}
