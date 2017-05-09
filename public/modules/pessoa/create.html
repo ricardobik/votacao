@@ -26,7 +26,7 @@
 
 	<div class="container">
 		<div class="row">
-			<form role="form" method="POST" v-controller="candidato_form" v-on="submit: cropPicture">
+			<form role="form" method="POST" id="pessoa_form" v-on="submit: cropPicture">
 
 				<!-- card structure -->
 				<input type="hidden" name="foto" id="foto">
@@ -138,8 +138,8 @@
 	<!--Import JUnit tests-->
 	<script type="text/javascript" src="https://code.jquery.com/qunit/qunit-2.1.1.js"></script>
 
-	<script type="text/javascript" src="/js/bin/general.js"></script>
-	<script type="text/javascript" src="/js/bin/pessoa.js"></script>
+	<script type="text/javascript" src="/js/components/general.js"></script>
+	<script type="text/javascript" src="/js/components/pessoa.js"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -166,8 +166,8 @@
 				data.candidato = $('#candidato').prop('checked');
 				data.eleitor = $('#eleitor').prop('checked');
 				data.responsavel = $('#responsavel').prop('checked');
-				//				createPessoa(data);
-				console.log(data);
+				createPessoa(data);
+				//				console.log(data);
 			});
 
 			$uploadCrop = $('#upload-demo').croppie({

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="/sass/materialize.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="/sass/table.css" media="screen" />
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+	<!-- Import Navbar -->
+	<div id="nav-bar"></div>
+
+	<div class="container">
+
+		<form method="POST" name="votacao_form_partial" action="" id="votacao_form_partial" novalidate="novalidate">
+			<div class="row">
+				<div class="col s12 m8 offset-m2" id="cardFirst">
+					<div class="card-panel hide green lighten-4" id="result"></div>
+					<!-- Div with submit result -->
+					<div class="card">
+						<div class="card-content">
+							<span class="card-title">Cadastrar Votação</span>
+							<div class="row">
+								<div class="input-field col m12 s12">
+									<input id="titulo" name="titulo" type="text" class="validate" required="" aria-required="true">
+									<label class="active" for="titulo">Título</label>
+								</div>
+								<div class="input-field col s12">
+									<textarea id="descricao" class="materialize-textarea" name="descricao"></textarea>
+									<label for="descricao">Descrição</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col m6 s12">
+									<input id="datainicio" name="datainicio" type="text" class="validate" required="" aria-required="true">
+									<label class="active" for="datainicio">Data de Início</label>
+								</div>
+								<div class="input-field col m6 s12">
+									<input id="datatermino" name="datatermino" type="text" class="validate" required="" aria-required="true">
+									<label class="active" for="datatermino">Data de Término</label>
+								</div>
+							</div>
+						</div>
+						<div class="card-action right-align">
+							<a class="btn waves-effect" id="next">Próximo</a>
+						</div>
+					</div>
+				</div>
+				<!--action button-->
+				<div class="fixed-action-btn horizontal">
+					<a class="btn-floating btn-large red">
+						<i class="large material-icons">add</i>
+					</a>
+					<ul>
+						<li><a href="javascripti:void(0)" onclick="javascript:goSearch(); return false;" class="btn-floating purple"><i class="material-icons">search</i></a></li>
+						<li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
+					</ul>
+				</div>
+			</div>
+		</form>
+
+
+		<!---This is the card actually using the transition. I have it set to opacity:0 to start so it seems invisible--->
+		<div id="more" class="card col m8 offset-m2 hide">
+			<div class="card material-table">
+
+				<ul class="tabs">
+					<li class="tab col s3"><a class="active" href="#divCandidato">CANDIDATO</a></li>
+					<li class="tab col s2" id="teste"><a href="#divEleitor">ELEITOR</a></li>
+					<li class="tab col s2"><a href="#divResponsavel">RESPONSÁVEL</a></li>
+				</ul>
+
+
+				<div id="divCandidato">
+					<form method="POST" name="candidato_form" id="candidato_form" novalidate="novalidate">
+						<div class="card-content">
+							<div class="row">
+								<div class="col m6">
+									<div class="table-header">
+
+										<div class="actions">
+											<input id="search-input-candidato" type="text" class="search-header">
+											<a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+										</div>
+									</div>
+									<table id="table-candidato" class="search-page">
+										<thead>
+											<tr>
+												<th></th>
+												<th> NOME </th>
+												<th> CPF </th>
+												<th> INFO </th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+								<div class="col m6">
+									<div class="table-header">
+										<div class="actions">
+											<input id="search-input-candidato-selecionado" type="text" class="search-header">
+											<a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+										</div>
+									</div>
+									<table id="candidato-selecionado" class="search-page">
+										<thead>
+											<tr>
+												<th> NOME </th>
+												<th> CPF </th>
+												<!--												<th> INFO </th>-->
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div id="divEleitor">
+					<form method="POST" name="marca_form" id="marca_form" novalidate="novalidate">
+						<div class="card-content">
+							<span class="card-title">Cadastrar Eleitor</span>
+							<div class="row">
+								<div class="input-field col m12 s12">
+									<i class="material-icons prefix">directions_car</i>
+									<input id="marcaNome" type="text" class="validate" name="marcaNome">
+									<label for="marcaNome">Marca</label>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div id="divResponsavel">
+
+					<form method="POST" name="modelo_form" id="modelo_form" novalidate="novalidate">
+						<div class="card-content">
+							<span class="card-title">Cadastrar Responsável</span>
+							<div class="row">
+
+								<div class="input-field col m12" id="novoModelo">
+									<select id="marca" name="marca">
+									</select>
+									<label for="marca">Marca</label>
+								</div>
+
+								<div class="input-field col m12 s12">
+									<i class="material-icons prefix">directions_car</i>
+									<input id="modelo" type="text" class="validate" name="modeloNome">
+									<label for="modelo">Modelo</label>
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+
+				<div class="card-footer">
+					<div class="card-action">
+						<a class="btn-flat waves-effect" onclick='slideOut("#cardFirst", 1350, -800, more);'>Voltar</a>
+						<a href="#!" class="waves-effect btn right" id="createVeiculo" name="createVeiculo">Finalizar</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!--Import jQuery before materialize.js-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="/js/bin/materialize.min.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
+
+	<!--Import DataTables-->
+	<script type="text/javascript" src="/js/bin/jquery.dataTables.min.js"></script>
+
+	<script type="text/javascript" src="/js/components/general.js"></script>
+	<script type="text/javascript" src="/js/components/votacao.js"></script>
+	<script type="text/javascript" src="/js/components/pessoa.js"></script>
+
+	<script>
+		$(document).ready(function() {
+
+			//Fill Table with Json
+			getPessoaTable("candidato");
+			getPessoaTable("responsavel");
+
+			// #serch-input is a <input type="text"> element
+			$('#search-input-candidato').on('keyup', function() {
+				$('table#table-candidato').DataTable().search(this.value).draw();
+			});
+			$('#search-input-candidato-selecionado').on('keyup', function() {
+				$('table#candidato-selecionado').DataTable().search(this.value).draw();
+			});
+
+			//Load Navbar and dropdown menu
+			$('#nav-bar').load("/modules/layout/navbar.html", function() {
+				$(".button-collapse").sideNav();
+				$('.dropdown-button').dropdown();
+				$("#brasao").attr("src", imageUrl + "brasao_branco.png");
+				$("#preview").attr("src", imageUrl + "avatar.png");
+			});
+
+			//Enable edit button and set id
+			//			$('.search-page tbody').on('click', 'tr', function() {
+			//				if ($(this).hasClass('selected')) {
+			//					$(this).removeClass('selected');
+			//					$('#callModalEdit').addClass('disabled');
+			//				} else {
+			//					table.$('tr.selected').removeClass('selected');
+			//					$(this).addClass('selected');
+			//					$('#callModalEdit').removeClass('disabled');
+			//					$update = table.row(this).data();
+			//				}
+			//			});
+
+
+			//get de form data and save
+			$("#submit").click(function(e) {
+				var data = new Object();
+				data.nome = $("#nome").val();
+				data.admin = $('#admin').prop('checked')
+				data.votacao = $("#votacao").val();
+				data.senha = $("#senha").val();
+				createVotacao(data);
+			});
+
+			//Validate first vehicles data
+			$("#next").click(function() {
+
+				$("#votacao_form_partial").validate();
+				if ($("#votacao_form_partial").valid()) {
+					slideIn("#more", 1350, -800, cardFirst);
+					//                    $("#infoSpan").text("Veículo: " + marca + " " + modelo + " Placa: " + placa);
+					var validator = $("#votacao_form_partial").validate();
+					validator.resetForm();
+				};
+			});
+
+			//Table Settings
+
+			tblcandidatoselecionado = $('table#candidato-selecionado').DataTable({
+				columns: [{
+					//					data: null,
+					//					render: function(data, type, full, meta) {
+					//						return '<a href="#" class="btn-flat waves-effect btn-floating table-action btn-remove"><i class="material-icons black-text">delete_forever</i></a>';
+					//					},
+					//					searchable: false
+					//				}, {
+					//					data: "id",
+					//					visible: false,
+					//					searchable: false
+					//				}, {
+					data: "nome"
+				}, {
+					data: "cpf"
+				}, ],
+				select: true,
+				responsive: true,
+				fixedColumns: true,
+				lengthChange: false,
+				pageLength: 5,
+				dom: 'lrti<"right"p>',
+				language: {
+					url: "../../doc/Portuguese-Brasil.json"
+
+				}
+			});
+
+			$('table#table-candidato').on('click', '.btn-add', function() {
+
+				var row = $(this).parents('tr');
+				var tblcandidato = $('table#table-candidato').DataTable();
+				var data = tblcandidato.row(row).data();
+//				console.log(tblcandidatoselecionado);
+
+				tblcandidatoselecionado.row.add(data).draw(false);
+
+				tblcandidato.row(row).remove().draw(false);
+				//				tblcandidato = $('table#table-' + tipo + '').DataTable()
+				$(".btn-floating.candidato").html(tblcandidatoselecionado.rows().count());
+				
+			});
+
+		});
+
+	</script>
+
+</body>
+
+</html>
