@@ -92,6 +92,78 @@
       "candidato": "true",
       "eleitor": "true",
       "responsavel": "false"
+    },
+    {
+      "nome": "ricardoasdfasdfasdfasdfasdfasdfasdfasdfasfasfasfas",
+      "cpf": "11100022254",
+      "foto": "",
+      "candidato": "true",
+      "eleitor": "true",
+      "responsavel": "false",
+      "id": 15
+    },
+    {
+      "nome": "aaaasssssss",
+      "cpf": "22211368884",
+      "foto": "",
+      "candidato": "true",
+      "eleitor": "true",
+      "responsavel": "false",
+      "id": 16
+    }
+  ],
+  "votacao": [
+    {
+      "titulo": "cipa",
+      "descricao": "cipa",
+      "candidato[]": [
+        "7",
+        "9",
+        "11",
+        "4"
+      ],
+      "id": 1
+    },
+    {
+      "titulo": "cipa",
+      "descricao": "cipa",
+      "datainicio": "10/02/1982",
+      "datatermino": "10/02/2017",
+      "candidato[0]": "6",
+      "candidato[1]": "8",
+      "candidato[2]": "9",
+      "candidato[3]": "11",
+      "candidato[4]": "12",
+      "candidato[5]": "13",
+      "candidato[6]": "4",
+      "eleitor[0]": "16",
+      "eleitor[1]": "4",
+      "eleitor[2]": "15",
+      "responsavel[0]": "9",
+      "responsavel[1]": "4",
+      "id": 2
+    },
+    {
+      "titulo": "cipa",
+      "descricao": "cipa",
+      "datainicio": "cipa",
+      "datatermino": "cipa",
+      "candidato[]": [
+        "8",
+        "10",
+        "12",
+        "4"
+      ],
+      "eleitor[]": [
+        "16",
+        "14",
+        "15"
+      ],
+      "responsavel[]": [
+        "9",
+        "4"
+      ],
+      "id": 3
     }
   ]
 }

@@ -76,7 +76,6 @@
 				<span class="card-title" id="infoSpan" name="infoSpan"></span>
 			</div>
 
-
 			<ul class="tabs">
 				<li class="tab col s3" id="tabCandidato"><a href="#divCandidato">CANDIDATO</a></li>
 				<li class="tab col s3" id="tabEleitor"><a href="#divEleitor">ELEITOR</a></li>
@@ -253,8 +252,8 @@
 	<script>
 		$(document).ready(function() {
 
-//			var qtdCandidato, qtdEleitor, qtdResponsavel = 0;
-			
+			//			var qtdCandidato, qtdEleitor, qtdResponsavel = 0;
+
 			//Select Default Tab
 			$('ul.tabs').tabs('select_tab', 'divCandidato');
 
@@ -283,6 +282,34 @@
 				var data = new Object();
 				data.titulo = $("#titulo").val();
 				data.descricao = $('#descricao').val();
+				data.datainicio = $('#datainicio').val();
+				data.datatermino = $('#datatermino').val();
+				
+				var rowsCandidato = tblcandidatoselecionado.rows().data();
+				var rowsEleitor = tbleleitorselecionado.rows().data();
+				var rowsResponsavel = tblresponsavelselecionado.rows().data();
+
+				var idCandidato = new Array();
+				var idEleitor =  new Array();
+				var idResponsavel =  new Array();
+
+				$.each(rowsCandidato, function(i) {
+					idCandidato[i] = rowsCandidato[i].id;
+				});
+
+				$.each(rowsEleitor, function(i) {
+					idEleitor[i] = rowsEleitor[i].id;
+				});
+
+				$.each(rowsResponsavel, function(i) {
+					idResponsavel[i] = rowsResponsavel[i].id;
+				});
+
+				data.candidato = idCandidato;
+				data.eleitor = idEleitor;
+				data.responsavel = idResponsavel;
+
+				console.log(data);
 				createVotacao(data);
 			});
 
@@ -373,7 +400,7 @@
 			var tblcandidato = $('table#table-candidato').DataTable();
 			var tbleleitor = $('table#table-eleitor').DataTable();
 			var tblresponsavel = $('table#table-responsavel').DataTable();
-			
+
 
 			$('table#table-candidato').on('click', '.btn-add', function() {
 				var row = $(this).parents('tr');
@@ -389,7 +416,7 @@
 				tblcandidato.row.add(data).draw(false);
 				tblcandidatoselecionado.row(row).remove().draw(false);
 				qtdCandidato = tblcandidatoselecionado.rows().count();
-				
+
 			});
 
 			//Adiciona e Deleta Tabela Eleitor

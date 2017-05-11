@@ -229,7 +229,6 @@ function deletePessoa(id) {
 
 //Create function
 function createPessoa(data) {
-
 	//make AJAX request
 	validator = $("#pessoa_form").validate();
 	if ($("#pessoa_form").valid()) {

@@ -96,6 +96,7 @@ function createVotacao(data) {
 
 					//if received a response from the server
 					success: function (response) {
+						slideOut("#cardFirst", 1350, -800, more);
 						resetForm($("#votacao_form_partial"));
 						validator.resetForm();
 
@@ -283,3 +284,5 @@ function deleteVotacao(id) {
 	});
 
 }
+
+
