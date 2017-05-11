@@ -52,8 +52,7 @@ function goCreate() {
 }
 
 function goInfoVeiculo(div) {
-    
-    
+       
     //location.href = createUrl;
     location.href = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "/infoveiculo/create.html#" + div;
     

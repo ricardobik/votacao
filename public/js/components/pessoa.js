@@ -50,7 +50,7 @@ function getPessoaTable(tipo) {
 		var tabela = 'table#table-' + tipo + '';
 
 		//Populates Table with Json
-		tblcandidato = $('table#table-' + tipo + '').DataTable({
+		$('table#table-' + tipo + '').DataTable({
 			ajax: {
 
 				url: url,
@@ -64,7 +64,7 @@ function getPessoaTable(tipo) {
 				searchable: false
 			}, {
 				data: "nome",
-				width: "10px;"
+				width: "20%"
 			}, {
 				data: "cpf",
             }, {
@@ -87,7 +87,6 @@ function getPessoaTable(tipo) {
 				url: "../../doc/Portuguese-Brasil.json"
 			}
 		});
-
 
 	} else {
 		//Populates Table with Json
