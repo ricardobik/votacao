@@ -1,5 +1,6 @@
 var qtdCandidato, qtdEleitor, qtdResponsavel = 0;
 
+
 //Rules and Messages to Validate
 $("#votacao_form_partial").validate({
 	ignore: [],
@@ -70,6 +71,7 @@ $("#votacao_form").validate({
 
 //Create function
 function createVotacao(data) {
+    console.log(data.candidato + data.responsavel + data.eleitor);
 
 	validator = $("#votacao_form_partial").validate();
 
@@ -99,14 +101,8 @@ function createVotacao(data) {
 						slideOut("#cardFirst", 1350, -800, more);
 						resetForm($("#votacao_form_partial"));
 						validator.resetForm();
-
-					},
-					error: function (XMLHttpRequest, textStatus, errorThrown) {
-						alert("Erro!");
 					}
-
 				});
-
 			}
 		});
 

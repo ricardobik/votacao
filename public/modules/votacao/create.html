@@ -289,9 +289,9 @@
 				var rowsEleitor = tbleleitorselecionado.rows().data();
 				var rowsResponsavel = tblresponsavelselecionado.rows().data();
 
-				var idCandidato = new Array();
-				var idEleitor =  new Array();
-				var idResponsavel =  new Array();
+				var idCandidato = [];
+				var idEleitor =  {};
+				var idResponsavel = {};
 
 				$.each(rowsCandidato, function(i) {
 					idCandidato[i] = rowsCandidato[i].id;
@@ -304,8 +304,10 @@
 				$.each(rowsResponsavel, function(i) {
 					idResponsavel[i] = rowsResponsavel[i].id;
 				});
+                
+                JidCandidato = JSON.stringify(idCandidato);
 
-				data.candidato = idCandidato;
+				data.candidato = JidCandidato;
 				data.eleitor = idEleitor;
 				data.responsavel = idResponsavel;
 
