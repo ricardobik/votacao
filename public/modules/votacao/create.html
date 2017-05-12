@@ -289,9 +289,9 @@
 				var rowsEleitor = tbleleitorselecionado.rows().data();
 				var rowsResponsavel = tblresponsavelselecionado.rows().data();
 
-				var idCandidato = [];
-				var idEleitor =  {};
-				var idResponsavel = {};
+				var idCandidato = new Array();
+				var idEleitor =  new Array();
+				var idResponsavel =  new Array();
 
 				$.each(rowsCandidato, function(i) {
 					idCandidato[i] = rowsCandidato[i].id;
@@ -304,14 +304,11 @@
 				$.each(rowsResponsavel, function(i) {
 					idResponsavel[i] = rowsResponsavel[i].id;
 				});
-                
-                JidCandidato = JSON.stringify(idCandidato);
 
-				data.candidato = JidCandidato;
+				data.candidato = idCandidato;
 				data.eleitor = idEleitor;
 				data.responsavel = idResponsavel;
 
-				console.log(data);
 				createVotacao(data);
 			});
 

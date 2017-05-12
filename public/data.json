@@ -246,6 +246,104 @@
       "datatermino": "CCC",
       "candidato": "[6,7,8,10,4]",
       "id": 10
+    },
+    {
+      "titulo": "cipinha",
+      "descricao": "cipa",
+      "datainicio": "cipa",
+      "datatermino": "cipa",
+      "candidato[]": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "4"
+      ],
+      "eleitor[]": [
+        "9",
+        "14",
+        "4",
+        "15"
+      ],
+      "responsavel[]": [
+        "9",
+        "4"
+      ],
+      "id": 11
+    },
+    {
+      "titulo": "cipão",
+      "descricao": "cipa",
+      "datainicio": "cipa",
+      "datatermino": "cipa",
+      "candidato[]": "4",
+      "id": 12
+    },
+    {
+      "titulo": "cips",
+      "descricao": "cips",
+      "datainicio": "cips",
+      "datatermino": "cips",
+      "candidato[]": [
+        "6",
+        "4"
+      ],
+      "id": 13
+    },
+    {
+      "titulo": "cipppa",
+      "descricao": "cipappa",
+      "datainicio": "cipa",
+      "datatermino": "cipa",
+      "candidato[]": [
+        "6",
+        "7",
+        "10",
+        "4"
+      ],
+      "eleitor[]": [
+        "9",
+        "4"
+      ],
+      "responsavel[]": [
+        "9",
+        "4"
+      ],
+      "id": 14
+    },
+    {
+      "titulo": "eeeee",
+      "descricao": "eeeee",
+      "datainicio": "eee",
+      "datatermino": "eee",
+      "candidato[]": [
+        "6",
+        "9",
+        "4"
+      ],
+      "id": 15
+    },
+    {
+      "titulo": "cipppp",
+      "descricao": "cipapa",
+      "datainicio": "cipapap",
+      "datatermino": "ciipaa",
+      "candidato[]": [
+        "6",
+        "7",
+        "8",
+        "4"
+      ],
+      "eleitor[]": [
+        "9",
+        "14",
+        "4"
+      ],
+      "responsavel[]": [
+        "9",
+        "4"
+      ],
+      "id": 16
     }
   ]
 }
