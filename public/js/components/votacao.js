@@ -73,7 +73,6 @@ $("#votacao_form").validate({
 
 //Create function
 function createVotacao(data) {
-    console.log(data.candidato + data.responsavel + data.eleitor);
 
     validator = $("#votacao_form_partial").validate();
 
@@ -105,7 +104,6 @@ function createVotacao(data) {
                             slideOut("#cardFirst", 1350, -800, more);
                             resetForm($("#votacao_form_partial"));
                             validator.resetForm();
-
                         }
                     });
                 };
@@ -116,44 +114,6 @@ function createVotacao(data) {
                 swal("Cancelled", "Você cancelou a ação", "error");
             }
         });
-
-
-    //    swal({
-    //                title: "Deseja Cadastrar essa votação?",
-    //                text: "A votação tem:\nCANDIDATOS: " + qtdCandidato + "\nELEITORES: " + qtdEleitor + "\nRESPONSÁVEIS: " + qtdResponsavel,
-    //                type: "warning",
-    //                showCancelButton: true,
-    //                confirmButtonColor: '#DD6B55',
-    //                confirmButtonText: 'Sim, Tenho certeza!',
-    //                cancelButtonText: "Não, Quero cancelar!",
-    //                closeOnConfirm: false,
-    //                closeOnCancel: false
-    //        },
-    //        function (isConfirm) {
-    //            if (!isConfirm) return;
-    //                //make AJAX request
-    //                if ($("#votacao_form_partial").valid()) {
-    //                    $.ajax({
-    //                        type: "POST",
-    //                        url: urlApi + "votacao",
-    //                        data: data,
-    //                        dataType: "json",
-    //    
-    //                        //if received a response from the server
-    //                        success: function (response) {
-    //                            slideOut("#cardFirst", 1350, -800, more);
-    //                            resetForm($("#votacao_form_partial"));
-    //                            validator.resetForm();
-    //    
-    //                        }
-    //                    });
-    //                swal("Shortlisted!", "Candidates are successfully shortlisted!", "success");
-    //
-    //            } else {
-    //                swal("Cancelled", "Your imaginary file is safe :)", "error");
-    //            }
-    //        });
-
 
     //Reload Material Form
     Materialize.updateTextFields();
