@@ -47,7 +47,7 @@
                     <div class="card-action right-align" id="callModal" name="callModal">
                         <!-- Modal Trigger -->
                         <a class="waves-effect waves-light btn disabled" name="callModalEdit" id="callModalEdit" href="#modal-edit">Detalhes</a>
-                        <a class="waves-effect waves-light btn disabled" name="callModalEditPessoa" id="callModalEditPessoa" href="#modal-edit-pessoa">Adicionar/Remover Pessoas</a>
+                        <a class="waves-effect waves-light btn disabled modal-trigger" name="callModalEditPessoa" id="callModalEditPessoa" href="#modal-edit-pessoa">Adicionar/Remover Pessoas</a>
                     </div>
                 </div>
                 <!--action button-->
@@ -116,170 +116,173 @@
 
         <div id="modal-edit-pessoa" class="modal modal-fixed-footer material-table modal-table">
             <div class="card-content">
+                <div class="row">
 
-                <ul class="tabs">
-                    <li class="tab col s3" id="tabCandidato"><a href="#divCandidato">CANDIDATO</a></li>
-                    <li class="tab col s3" id="tabEleitor"><a href="#divEleitor">ELEITOR</a></li>
-                    <li class="tab col s3" id="tabResponsavel"><a href="#divResponsavel">RESPONSÁVEL</a></li>
-                </ul>
+                    <ul class="tabs">
+                        <li class="tab col s3"><a id="firstTab" class="active" href="#divCandidato">CANDIDATO</a></li>
+                        <li class="tab col s3"><a href="#divEleitor">ELEITOR</a></li>
+                        <li class="tab col s3"><a href="#divResponsavel">RESPONSÁVEL</a></li>
+                    </ul>
 
-                <div id="divCandidato">
-                    <form method="POST" name="candidato_form" id="candidato_form" novalidate="novalidate">
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="col m6">
-                                    <div class="table-header">
 
-                                        <div class="actions">
-                                            <input id="search-input-candidato" type="text" class="search-header">
-                                            <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                    <div id="divCandidato">
+                        <form method="POST" name="candidato_form" id="candidato_form" novalidate="novalidate">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col m6">
+                                        <div class="table-header">
+
+                                            <div class="actions">
+                                                <input id="search-input-candidato" type="text" class="search-header">
+                                                <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                            </div>
                                         </div>
+                                        <table id="table-candidato" class="search-page-candidato">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th> NOME </th>
+                                                    <th> CPF </th>
+                                                    <th> ADD </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                     </div>
-                                    <table id="table-candidato" class="search-page-candidato">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th> NOME </th>
-                                                <th> CPF </th>
-                                                <th> ADD </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                                <div class="col m6">
-                                    <div class="table-header">
-                                        <div class="actions">
-                                            <input id="search-input-candidato-selecionado" type="text" class="search-header">
-                                            <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                    <div class="col m6">
+                                        <div class="table-header">
+                                            <div class="actions">
+                                                <input id="search-input-candidato-selecionado" type="text" class="search-header">
+                                                <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                            </div>
                                         </div>
+                                        <table id="candidato-selecionado" class="search-page-candidato-selecionado">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th> NOME </th>
+                                                    <th> CPF </th>
+                                                    <th> DEL </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                     </div>
-                                    <table id="candidato-selecionado" class="search-page-candidato-selecionado">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th> NOME </th>
-                                                <th> CPF </th>
-                                                <th> DEL </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="divEleitor">
-                    <form method="POST" name="eleitor_form" id="eleitor_form" novalidate="novalidate">
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="col m6">
-                                    <div class="table-header">
-
-                                        <div class="actions">
-                                            <input id="search-input-eleitor" type="text" class="search-header">
-                                            <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-                                        </div>
-                                    </div>
-                                    <table id="table-eleitor" class="search-page">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th> NOME </th>
-                                                <th> CPF </th>
-                                                <th> ADD </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                                <div class="col m6">
-                                    <div class="table-header">
-                                        <div class="actions">
-                                            <input id="search-input-eleitor-selecionado" type="text" class="search-header">
-                                            <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-                                        </div>
-                                    </div>
-                                    <table id="eleitor-selecionado" class="search-page">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th> NOME </th>
-                                                <th> CPF </th>
-                                                <th> DEL </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="divResponsavel">
-
-                    <form method="POST" name="responsavel_form" id="responsavel_form" novalidate="novalidate">
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="col m6">
-                                    <div class="table-header">
-
-                                        <div class="actions">
-                                            <input id="search-input-responsavel" type="text" class="search-header">
-                                            <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-                                        </div>
-                                    </div>
-                                    <table id="table-responsavel" class="search-page">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th> NOME </th>
-                                                <th> CPF </th>
-                                                <th> ADD </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                                <div class="col m6">
-                                    <div class="table-header">
-                                        <div class="actions">
-                                            <input id="search-input-responsavel-selecionado" type="text" class="search-header">
-                                            <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-                                        </div>
-                                    </div>
-                                    <table id="responsavel-selecionado" class="search-page">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th> NOME </th>
-                                                <th> CPF </th>
-                                                <th> DEL </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <div class="card-action right-align">
-                    <div class="" id="divDelete">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
-                        <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deletePessoa">Deletar</a>
-                        <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="editPessoa">Editar</a>
-
+                        </form>
                     </div>
-                    <div class="hide" id="divEdit">
-                        <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="update">Salvar</a>
-                        <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
+
+                    <div id="divEleitor">
+                        <form method="POST" name="eleitor_form" id="eleitor_form" novalidate="novalidate">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col m6">
+                                        <div class="table-header">
+
+                                            <div class="actions">
+                                                <input id="search-input-eleitor" type="text" class="search-header">
+                                                <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                            </div>
+                                        </div>
+                                        <table id="table-eleitor" class="search-page">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th> NOME </th>
+                                                    <th> CPF </th>
+                                                    <th> ADD </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col m6">
+                                        <div class="table-header">
+                                            <div class="actions">
+                                                <input id="search-input-eleitor-selecionado" type="text" class="search-header">
+                                                <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                            </div>
+                                        </div>
+                                        <table id="eleitor-selecionado" class="search-page">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th> NOME </th>
+                                                    <th> CPF </th>
+                                                    <th> DEL </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="divResponsavel">
+
+                        <form method="POST" name="responsavel_form" id="responsavel_form" novalidate="novalidate">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col m6">
+                                        <div class="table-header">
+
+                                            <div class="actions">
+                                                <input id="search-input-responsavel" type="text" class="search-header">
+                                                <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                            </div>
+                                        </div>
+                                        <table id="table-responsavel" class="search-page">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th> NOME </th>
+                                                    <th> CPF </th>
+                                                    <th> ADD </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col m6">
+                                        <div class="table-header">
+                                            <div class="actions">
+                                                <input id="search-input-responsavel-selecionado" type="text" class="search-header">
+                                                <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                            </div>
+                                        </div>
+                                        <table id="responsavel-selecionado" class="search-page">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th> NOME </th>
+                                                    <th> CPF </th>
+                                                    <th> DEL </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="card-action right-align">
+                        <div class="" id="divDelete">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
+                            <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deletePessoa">Deletar</a>
+                            <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="editPessoa">Editar</a>
+
+                        </div>
+                        <div class="hide" id="divEdit">
+                            <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="update">Salvar</a>
+                            <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,8 +291,8 @@
     </form>
 
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/js/bin/materialize.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/bin/materialize.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
 
@@ -309,15 +312,22 @@
             //Fill Table with Json
             getVotacaoTable();
 
-            //Call modal form
             $('.modal').modal({
-                dismissible: false,
+                dismissible: false, // Modal can be dismissed by clicking outside of the modal
                 opacity: .5, // Opacity of modal background
                 inDuration: 300, // Transition in duration
                 outDuration: 200, // Transition out duration
-                startingTop: '10%', // Starting top style attribute
+                startingTop: '4%', // Starting top style attribute
                 endingTop: '10%', // Ending top style attribute
+                ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                    $('ul.tabs').tabs();
+                    $('#firstTab').click();
+                },
+                complete: function() {
+//                    alert('Closed');
+                } // Callback for Modal close
             });
+
 
             // #serch-input is a <input type="text"> element
             $('#search-input').on('keyup', function() {
@@ -351,6 +361,7 @@
             $('#callModalEditPessoa').on('click', function() {
                 //Select Default Tab
                 $('ul.tabs').tabs('select_tab', 'divCandidato');
+
                 getVotacao($update.id);
                 getPessoaTable("candidato");
                 getPessoaTable("eleitor");

@@ -54,8 +54,9 @@ input[type=number] {
 
 .modal-table {
     width: 80% !important;
+    height: 80% !important;
     max-height: 100% !important;
-    overflow-y: hidden !important;
+/*    overflow-y: hidden !important;*/
 }
 
 
