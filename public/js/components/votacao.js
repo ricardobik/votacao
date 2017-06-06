@@ -1,6 +1,7 @@
 var qtdCandidato = 0;
 var qtdEleitor = 0;
 var qtdResponsavel = 0;
+var votCandidato = [];
 
 
 //Rules and Messages to Validate
@@ -96,8 +97,9 @@ function createVotacao(data) {
                     $.ajax({
                         type: "POST",
                         url: urlApi + "votacao",
-                        data: data,
+                        data: JSON.stringify(data),
                         dataType: "json",
+                        contentType: "application/json",
 
                         //if received a response from the server
                         success: function (response) {
@@ -120,36 +122,20 @@ function createVotacao(data) {
 
 };
 
-
 function getVotacaoTable() {
 
-    table = $('table#table-votacao').DataTable({
+    table_votacao = $('table#table-votacao').DataTable({
         ajax: {
             url: urlApi + "votacao",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json'
         },
         columns: [{
-            data: "id"
+            data: "titulo"
                 }, {
-            data: "marcaid"
+            data: "datainicio"
                 }, {
-            data: "modeloid"
-                }, {
-            data: "placa"
-                }],
-        "columnDefs": [{
-            "width": "10%",
-            "targets": 0
-                }, {
-            "width": "30%",
-            "targets": 1
-                }, {
-            "width": "40%",
-            "targets": 2
-                }, {
-            "width": "50%",
-            "targets": 3
+            data: "datatermino"
                 }],
         select: true,
         fixedColumns: true,
@@ -163,36 +149,25 @@ function getVotacaoTable() {
 
 }
 
-//Fill motorista Modal to Edit
-function getVotacao(Id) {
+//Fill Votacao Modal to Edit
+function getVotacao(id) {
 
     $.ajax({
         type: "GET",
-        url: urlApi + "votacao/" + Id,
-
+        url: urlApi + "votacao/" + id,
         dataType: "json",
 
         //if received a response from the server
         success: function (resp) {
 
             $("#id").val(resp.data.id);
-            $("#tipo").val(resp.data.tipoid);
-            $("#placa").val(resp.data.placa);
+            $("#titulo").val(resp.data.titulo);
+            $("#descricao").val(resp.data.descricao);
+            $("#datainicio").val(resp.data.datainicio);
+            $("#datatermino").val(resp.data.datatermino);
 
-            getMarca(resp.data.marcaid, "select")
-
-            getModelo(resp.data.modeloid, "select");
-
-            getCombustiveis(resp.data.combustivelid);
-
-            getSetor(resp.data.setorid, "select");
-
-            $("#anofabricacao").val(resp.data.anofabricacao);
-            $("#combustivel").val(resp.data.combustivelid);
-            $("#renavam").val(resp.data.renavam);
-            $("#estadovotacao").val(resp.data.estadovotacao);
-            $("#info").val(resp.data.info);
-
+            votCandidato = resp.data.candidato;
+            
             //Reload Material Form
             Materialize.updateTextFields();
 

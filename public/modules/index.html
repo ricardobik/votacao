@@ -75,19 +75,19 @@
 	<!--Import JUnit tests-->
 	<script type="text/javascript" src="https://code.jquery.com/qunit/qunit-2.1.1.js"></script>
 
-	<script type="text/javascript" src="/js/bin/general.js"></script>
+	<script type="text/javascript" src="/js/components/general.js"></script>
 
 
 	<script>
 		$(document).ready(function() {
 
 			//Load Navbar and dropdown menu
-			$('#nav-bar').load("/modules/layout/navbar.html", function() {
-				$(".button-collapse").sideNav();
-				$('.dropdown-button').dropdown();
-				$("#brasao").attr("src", imageUrl + "brasao_branco.png");
-			});
-
+            $('#nav-bar').load("/modules/layout/navbar.html", function() {
+                $(".button-collapse").sideNav();
+                $('.dropdown-button').dropdown();
+                $("#brasao").attr("src", imageUrl + "brasao_branco.png");
+                $("#preview").attr("src", imageUrl + "avatar.png");
+            });
 		});
 
 	</script>

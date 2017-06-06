@@ -292,9 +292,12 @@
 				var idCandidato = new Array();
 				var idEleitor =  new Array();
 				var idResponsavel =  new Array();
+                
+                
 
 				$.each(rowsCandidato, function(i) {
 					idCandidato[i] = rowsCandidato[i].id;
+                    
 				});
 
 				$.each(rowsEleitor, function(i) {
@@ -304,11 +307,10 @@
 				$.each(rowsResponsavel, function(i) {
 					idResponsavel[i] = rowsResponsavel[i].id;
 				});
-
 				data.candidato = idCandidato;
 				data.eleitor = idEleitor;
 				data.responsavel = idResponsavel;
-
+//
 				createVotacao(data);
 			});
 
