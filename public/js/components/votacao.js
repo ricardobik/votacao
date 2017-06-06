@@ -167,6 +167,8 @@ function getVotacao(id) {
             $("#datatermino").val(resp.data.datatermino);
 
             votCandidato = resp.data.candidato;
+            votResponsavel = resp.data.responsavel;
+            votEleitor = resp.data.eleitor;
             
             //Reload Material Form
             Materialize.updateTextFields();

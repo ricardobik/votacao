@@ -43,7 +43,7 @@ $("#pessoa_form").validate({
 });
 
 //Fill table pessoa
-function getPessoaTable(tipo, candidatosId) {
+function getPessoaTable(tipo) {
 
     if (!!tipo) {
         var url = urlApi + 'pessoa?' + tipo + '=true';
@@ -51,104 +51,321 @@ function getPessoaTable(tipo, candidatosId) {
 
         //Populates Table with Json
 
-        tableCandidato = $('table#table-' + tipo + '').DataTable({
-            ajax: {
-                url: url,
-                contentType: 'application/json; charset=UTF-8',
-                dataType: 'json'
-            },
-            columns: [{
-                data: "id",
-                visible: true,
-                searchable: false,
-                width: "10%"
-			}, {
-                data: "nome",
-                width: "40%"
-			}, {
-                data: "cpf",
-            }, {
-                data: null,
-                render: function (data, type, full, meta) {
-                    return '<a href="#" class=" table-action btn-add"><i class="material-icons green-text">add</i></a>';
-                },
-                searchable: false
-			}],
-            fnInitComplete: function (oSettings, json) {
-                var row = tableCandidato.row();
-                var rowNode = row.node();
-                var remove;
-                var arr = [];
-                if (!!votCandidato) {
-                    tableCandidato.rows().every(function (rowIdx, tableLoop, rowLoop) {
-                        var d = this.data();
+        switch (tipo) {
+            case "candidato":
+                tableCandidato = $('table#table-' + tipo).DataTable({
+                    ajax: {
 
-                        $.each(votCandidato, function (index, value) {
-                            if (d.id == votCandidato[index]) {
-                                obj = new Object();
-                                obj.Candidato = d;
-                                obj.Remove = rowIdx;
-                                arr[index] = obj;
+                        url: url,
+                        contentType: 'application/json; charset=UTF-8',
+                        dataType: 'json'
+
+                    },
+                    columns: [{
+                        data: "id",
+                        visible: true,
+                        searchable: false,
+                        width: "10%"
+			}, {
+                        data: "nome",
+                        width: "40%"
+			}, {
+                        data: "cpf",
+                        width: "40%"
+            }, {
+                        data: null,
+                        render: function (data, type, full, meta) {
+                            return '<a href="#" class=" table-action btn-add"><i class="material-icons green-text">add</i></a>';
+                        },
+                        searchable: false
+			}],
+                    fnInitComplete: function (oSettings, json) {
+                        var row = tableCandidato.row();
+                        var rowNode = row.node();
+                        var remove;
+
+                        var arr = [];
+
+                        tableCandidato.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                            var d = this.data();
+
+                            $.each(votCandidato, function (index, value) {
+                                if (d.id == votCandidato[index]) {
+                                    obj = new Object();
+                                    obj.Candidato = d;
+                                    obj.Remove = rowIdx;
+                                    arr[index] = obj;
+                                }
+                            });
+
+                        });
+
+                        var tblcandidatoselecionado = $('table#candidato-selecionado').DataTable({
+
+                            columns: [{
+                                data: "id",
+                                visible: true,
+                                searchable: false,
+                                width: "10%"
+			             }, {
+                                data: "nome",
+                                width: "40%"
+			             }, {
+                                data: "cpf",
+                                width: "40%"
+                         }, {
+                                data: null,
+                                render: function (data, type, full, meta) {
+                                    return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
+                                },
+                                searchable: false
+			            }],
+                            fnInitComplete: function (oSettings, json) {
+                                var remove = [];
+                                $.each(arr, function (index, value) {
+                                    tblcandidatoselecionado.row.add(value.Candidato).draw(false);
+                                    remove[index] = value.Remove;
+                                });
+                                tableCandidato.rows(remove).remove().draw(false);
+                            },
+                            select: true,
+                            responsive: true,
+                            fixedColumns: true,
+                            lengthChange: false,
+                            pageLength: 5,
+                            dom: 'lrti<"right"p>',
+                            language: {
+                                url: "../../doc/Portuguese-Brasil.json"
                             }
                         });
-                    });
 
-                    var tableCandidatoselecionado = $('table#table-' + tipo + '-selecionado').DataTable({
-                        columns: [{
-                            data: "id",
-                            visible: true,
-                            searchable: false,
-                            width: "10%"
-			             }, {
-                            data: "nome",
-                            width: "40%"
-			             }, {
-                            data: "cpf",
-                         }, {
-                            data: null,
-                            render: function (data, type, full, meta) {
-                                return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
-                            },
-                            searchable: false
-			            }],
-                        fnInitComplete: function (oSettings, json) {
-                            var remove = [];
-                            $.each(arr, function (index, value) {
-                                tblcandidatoselecionado.row.add(value.Candidato).draw(false);
-                                remove[index] = value.Remove;
-                            });
-                            tableCandidato.rows(remove).remove().draw(false);
+
+                    },
+                    select: true,
+                    responsive: true,
+                    fixedColumns: true,
+                    lengthChange: false,
+                    pageLength: 5,
+                    dom: 'lrti<"right"p>',
+                    language: {
+                        url: "../../doc/Portuguese-Brasil.json"
+                    }
+                });
+                break;
+            case "eleitor":
+                tableEleitor = $('table#table-' + tipo).DataTable({
+                    ajax: {
+                        url: url,
+                        contentType: 'application/json; charset=UTF-8',
+                        dataType: 'json'
+                    },
+                    columns: [{
+                        data: "id",
+                        visible: true,
+                        searchable: false,
+                        width: "10%"
+			}, {
+                        data: "nome",
+                        width: "40%"
+			}, {
+                        data: "cpf",
+                        width: "40%"
+            }, {
+                        data: null,
+                        render: function (data, type, full, meta) {
+                            return '<a href="#" class=" table-action btn-add"><i class="material-icons green-text">add</i></a>';
                         },
-                        select: true,
-                        responsive: true,
-                        fixedColumns: true,
-                        lengthChange: false,
-                        pageLength: 5,
-                        dom: 'lrti<"right"p>',
-                        language: {
-                            url: "../../doc/Portuguese-Brasil.json"
-                        }
-                    });
-                }
-            },
-            select: true,
-            responsive: true,
-            fixedColumns: true,
-            lengthChange: false,
-            pageLength: 5,
-            dom: 'lrti<"right"p>',
-            language: {
-                url: "../../doc/Portuguese-Brasil.json"
-            }
-        });
+                        searchable: false
+			}],
+                    fnInitComplete: function (oSettings, json) {
+                        var row = tableEleitor.row();
+                        var rowNode = row.node();
+                        var remove;
+                        var arr = [];
+
+                        tableEleitor.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                            var d = this.data();
+
+                            $.each(votEleitor, function (index, value) {
+                                if (d.id == votEleitor[index]) {
+                                    obj = new Object();
+                                    obj.Eleitor = d;
+                                    obj.Remove = rowIdx;
+                                    arr[index] = obj;
+
+                                }
+                            });
+
+                        });
+
+                        var tbleleitorselecionado = $('table#eleitor-selecionado').DataTable({
+
+                            columns: [{
+                                data: "id",
+                                visible: true,
+                                searchable: false,
+                                width: "10%"
+			             }, {
+                                data: "nome",
+                                width: "40%"
+			             }, {
+                                data: "cpf",
+                                width: "40%"
+                         }, {
+                                data: null,
+                                render: function (data, type, full, meta) {
+                                    return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
+                                },
+                                searchable: false
+			            }],
+                            fnInitComplete: function (oSettings, json) {
+
+                                var remove = [];
+                                $.each(arr, function (index, value) {
+                                    tbleleitorselecionado.row.add(value.Eleitor).draw(false);
+                                    remove[index] = value.Remove;
+                                });
+                                tableEleitor.rows(remove).remove().draw(false);
+                            },
+                            select: true,
+                            responsive: true,
+                            fixedColumns: true,
+                            lengthChange: false,
+                            pageLength: 5,
+                            dom: 'lrti<"right"p>',
+                            language: {
+                                url: "../../doc/Portuguese-Brasil.json"
+                            }
+                        });
+
+
+                    },
+                    select: true,
+                    responsive: true,
+                    fixedColumns: true,
+                    lengthChange: false,
+                    pageLength: 5,
+                    dom: 'lrti<"right"p>',
+                    language: {
+                        url: "../../doc/Portuguese-Brasil.json"
+                    }
+                });
+                break;
+            case "responsavel":
+                console.log(tipo);
+                tableResponsavel = $('table#table-' + tipo).DataTable({
+                    ajax: {
+                        url: url,
+                        contentType: 'application/json; charset=UTF-8',
+                        dataType: 'json'
+                    },
+                    columns: [{
+                        data: "id",
+                        visible: true,
+                        searchable: false,
+                        width: "10%"
+			}, {
+                        data: "nome",
+                        width: "40%"
+			}, {
+                        data: "cpf",
+                        width: "40%"
+            }, {
+                        data: null,
+                        render: function (data, type, full, meta) {
+                            return '<a href="#" class=" table-action btn-add"><i class="material-icons green-text">add</i></a>';
+                        },
+                        searchable: false
+			}],
+                    fnInitComplete: function (oSettings, json) {
+                        var row = tableResponsavel.row();
+                        var rowNode = row.node();
+                        var remove;
+                        var arr = [];
+
+                        tableResponsavel.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                            var d = this.data();
+
+                            $.each(votResponsavel, function (index, value) {
+                                if (d.id == votResponsavel[index]) {
+                                    obj = new Object();
+                                    obj.Responsavel = d;
+                                    obj.Remove = rowIdx;
+                                    arr[index] = obj;
+
+                                }
+                            });
+
+                        });
+
+                        var tblresponsavelselecionado = $('table#responsavel-selecionado').DataTable({
+
+                            columns: [{
+                                data: "id",
+                                visible: true,
+                                searchable: false,
+                                width: "10%"
+			             }, {
+                                data: "nome",
+                                width: "40%"
+			             }, {
+                                data: "cpf",
+                                width: "40%"
+                         }, {
+                                data: null,
+                                render: function (data, type, full, meta) {
+                                    return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
+                                },
+                                searchable: false
+			            }],
+                            fnInitComplete: function (oSettings, json) {
+
+                                var remove = [];
+                                $.each(arr, function (index, value) {
+                                    tblresponsavelselecionado.row.add(value.Responsavel).draw(false);
+                                    remove[index] = value.Remove;
+                                });
+                                tableResponsavel.rows(remove).remove().draw(false);
+                            },
+                            select: true,
+                            responsive: true,
+                            fixedColumns: true,
+                            lengthChange: false,
+                            pageLength: 5,
+                            dom: 'lrti<"right"p>',
+                            language: {
+                                url: "../../doc/Portuguese-Brasil.json"
+                            }
+                        });
+
+
+                    },
+                    select: true,
+                    responsive: true,
+                    fixedColumns: true,
+                    lengthChange: false,
+                    pageLength: 5,
+                    dom: 'lrti<"right"p>',
+                    language: {
+                        url: "../../doc/Portuguese-Brasil.json"
+                    }
+                });
+                break;
+            default:
+                //                code block
+        }
+
+
 
     } else {
         //Populates Table with Json
         var table = $('table#table-pessoa').DataTable({
             ajax: {
+
                 url: urlApi + "pessoa",
                 contentType: 'application/json; charset=UTF-8',
                 dataType: 'json'
+
             },
             columns: [{
                 data: "nome",
@@ -186,6 +403,7 @@ function getPessoaTable(tipo, candidatosId) {
                     }
                 }
 			}],
+
             select: true,
             responsive: true,
             fixedColumns: true,

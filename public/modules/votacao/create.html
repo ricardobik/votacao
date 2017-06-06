@@ -2,461 +2,460 @@
 <html>
 
 <head>
-	<!--Import Google Icon Font-->
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!--Import materialize.css-->
-	<link type="text/css" rel="stylesheet" href="/sass/materialize.css" media="screen,projection" />
-	<link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
-	<link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
-	<link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
-	<link type="text/css" rel="stylesheet" href="/sass/table.css" media="screen" />
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/sass/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/sass/table.css" media="screen" />
 
-	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
 
-	<!-- Import Navbar -->
-	<div id="nav-bar"></div>
+    <!-- Import Navbar -->
+    <div id="nav-bar"></div>
 
-	<div class="container">
+    <div class="container">
 
-		<form method="POST" name="votacao_form_partial" action="" id="votacao_form_partial" novalidate="novalidate">
-			<div class="row">
-				<div class="col s12 m8 offset-m2" id="cardFirst">
-					<div class="card-panel hide green lighten-4" id="result"></div>
-					<!-- Div with submit result -->
-					<div class="card">
-						<div class="card-content">
-							<span class="card-title">Cadastrar Votação</span>
-							<div class="row">
-								<div class="input-field col m12 s12">
-									<input id="titulo" name="titulo" type="text" class="validate" required="" aria-required="true">
-									<label class="active" for="titulo">Título</label>
-								</div>
-								<div class="input-field col s12">
-									<textarea id="descricao" class="materialize-textarea" name="descricao"></textarea>
-									<label for="descricao">Descrição</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input id="datainicio" name="datainicio" type="text" class="validate" required="" aria-required="true">
-									<label class="active" for="datainicio">Data de Início</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input id="datatermino" name="datatermino" type="text" class="validate" required="" aria-required="true">
-									<label class="active" for="datatermino">Data de Término</label>
-								</div>
-							</div>
-						</div>
-						<div class="card-action right-align">
-							<a class="btn waves-effect" id="next">Próximo</a>
-						</div>
-					</div>
-				</div>
-				<!--action button-->
-				<div class="fixed-action-btn horizontal">
-					<a class="btn-floating btn-large red">
-						<i class="large material-icons">add</i>
-					</a>
-					<ul>
-						<li><a href="javascripti:void(0)" onclick="javascript:goSearch(); return false;" class="btn-floating purple"><i class="material-icons">search</i></a></li>
-						<li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
-					</ul>
-				</div>
-			</div>
-		</form>
-
-
-		<!---This is the card actually using the transition. I have it set to opacity:0 to start so it seems invisible--->
-		<div id="more" class="card col m12 hide material-table">
-			<div class="card-content">
-				<span class="card-title" id="infoSpan" name="infoSpan"></span>
-			</div>
-
-			<ul class="tabs">
-				<li class="tab col s3" id="tabCandidato"><a href="#divCandidato">CANDIDATO</a></li>
-				<li class="tab col s3" id="tabEleitor"><a href="#divEleitor">ELEITOR</a></li>
-				<li class="tab col s3" id="tabResponsavel"><a href="#divResponsavel">RESPONSÁVEL</a></li>
-			</ul>
-
-			<div id="divCandidato">
-				<form method="POST" name="candidato_form" id="candidato_form" novalidate="novalidate">
-					<div class="card-content">
-						<div class="row">
-							<div class="col m6">
-								<div class="table-header">
-
-									<div class="actions">
-										<input id="search-input-candidato" type="text" class="search-header">
-										<a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-									</div>
-								</div>
-								<table id="table-candidato" class="search-page">
-									<thead>
-										<tr>
-											<th></th>
-											<th> NOME </th>
-											<th> CPF </th>
-											<th> ADD </th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
-							<div class="col m6">
-								<div class="table-header">
-									<div class="actions">
-										<input id="search-input-candidato-selecionado" type="text" class="search-header">
-										<a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-									</div>
-								</div>
-								<table id="candidato-selecionado" class="search-page">
-									<thead>
-										<tr>
-											<th> NOME </th>
-											<th> CPF </th>
-											<th> DEL </th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-
-			<div id="divEleitor">
-				<form method="POST" name="eleitor_form" id="eleitor_form" novalidate="novalidate">
-					<div class="card-content">
-						<div class="row">
-							<div class="col m6">
-								<div class="table-header">
-
-									<div class="actions">
-										<input id="search-input-eleitor" type="text" class="search-header">
-										<a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-									</div>
-								</div>
-								<table id="table-eleitor" class="search-page">
-									<thead>
-										<tr>
-											<th></th>
-											<th> NOME </th>
-											<th> CPF </th>
-											<th> ADD </th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
-							<div class="col m6">
-								<div class="table-header">
-									<div class="actions">
-										<input id="search-input-eleitor-selecionado" type="text" class="search-header">
-										<a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-									</div>
-								</div>
-								<table id="eleitor-selecionado" class="search-page">
-									<thead>
-										<tr>
-											<th> NOME </th>
-											<th> CPF </th>
-											<th> DEL </th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-
-			<div id="divResponsavel">
-
-				<form method="POST" name="responsavel_form" id="responsavel_form" novalidate="novalidate">
-					<div class="card-content">
-						<div class="row">
-							<div class="col m6">
-								<div class="table-header">
-
-									<div class="actions">
-										<input id="search-input-responsavel" type="text" class="search-header">
-										<a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-									</div>
-								</div>
-								<table id="table-responsavel" class="search-page">
-									<thead>
-										<tr>
-											<th></th>
-											<th> NOME </th>
-											<th> CPF </th>
-											<th> ADD </th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
-							<div class="col m6">
-								<div class="table-header">
-									<div class="actions">
-										<input id="search-input-responsavel-selecionado" type="text" class="search-header">
-										<a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-									</div>
-								</div>
-								<table id="responsavel-selecionado" class="search-page">
-									<thead>
-										<tr>
-											<th> NOME </th>
-											<th> CPF </th>
-											<th> DEL </th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-
-			<div class="card-footer">
-				<div class="card-action">
-					<a class="btn-flat waves-effect" onclick='slideOut("#cardFirst", 1350, -800, more);'>Voltar</a>
-					<a href="#!" class="waves-effect btn right" id="submit" name="submit">Finalizar</a>
-				</div>
-			</div>
-		</div>
-		<!--		</div>-->
-
-	</div>
+        <form method="POST" name="votacao_form_partial" action="" id="votacao_form_partial" novalidate="novalidate">
+            <div class="row">
+                <div class="col s12 m8 offset-m2" id="cardFirst">
+                    <div class="card-panel hide green lighten-4" id="result"></div>
+                    <!-- Div with submit result -->
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Cadastrar Votação</span>
+                            <div class="row">
+                                <div class="input-field col m12 s12">
+                                    <input id="titulo" name="titulo" type="text" class="validate" required="" aria-required="true">
+                                    <label class="active" for="titulo">Título</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <textarea id="descricao" class="materialize-textarea" name="descricao"></textarea>
+                                    <label for="descricao">Descrição</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col m6 s12">
+                                    <input id="datainicio" name="datainicio" type="text" class="validate" required="" aria-required="true">
+                                    <label class="active" for="datainicio">Data de Início</label>
+                                </div>
+                                <div class="input-field col m6 s12">
+                                    <input id="datatermino" name="datatermino" type="text" class="validate" required="" aria-required="true">
+                                    <label class="active" for="datatermino">Data de Término</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action right-align">
+                            <a class="btn waves-effect" id="next">Próximo</a>
+                        </div>
+                    </div>
+                </div>
+                <!--action button-->
+                <div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-large red">
+                        <i class="large material-icons">add</i>
+                    </a>
+                    <ul>
+                        <li><a href="javascripti:void(0)" onclick="javascript:goSearch(); return false;" class="btn-floating purple"><i class="material-icons">search</i></a></li>
+                        <li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
 
 
-	<!--Import jQuery before materialize.js-->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript" src="/js/bin/materialize.min.js"></script>
-	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
+        <!---This is the card actually using the transition. I have it set to opacity:0 to start so it seems invisible--->
+        <div id="more" class="card col m12 hide material-table">
+            <div class="card-content">
+                <span class="card-title" id="infoSpan" name="infoSpan"></span>
+            </div>
 
-	<!--Import DataTables-->
-	<script type="text/javascript" src="/js/bin/jquery.dataTables.min.js"></script>
+            <ul class="tabs">
+                <li class="tab col s3" id="tabCandidato"><a href="#divCandidato">CANDIDATO</a></li>
+                <li class="tab col s3" id="tabEleitor"><a href="#divEleitor">ELEITOR</a></li>
+                <li class="tab col s3" id="tabResponsavel"><a href="#divResponsavel">RESPONSÁVEL</a></li>
+            </ul>
 
-	<script type="text/javascript" src="/js/components/general.js"></script>
-	<script type="text/javascript" src="/js/components/votacao.js"></script>
-	<script type="text/javascript" src="/js/components/pessoa.js"></script>
+            <div id="divCandidato">
+                <form method="POST" name="candidato_form" id="candidato_form" novalidate="novalidate">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col m6">
+                                <div class="table-header">
 
-	<script>
-		$(document).ready(function() {
+                                    <div class="actions">
+                                        <input id="search-input-candidato" type="text" class="search-header">
+                                        <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                    </div>
+                                </div>
+                                <table id="table-candidato" class="search-page">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th> NOME </th>
+                                            <th> CPF </th>
+                                            <th> ADD </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="col m6">
+                                <div class="table-header">
+                                    <div class="actions">
+                                        <input id="search-input-candidato-selecionado" type="text" class="search-header">
+                                        <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                    </div>
+                                </div>
+                                <table id="candidato-selecionado" class="search-page">
+                                    <thead>
+                                        <tr>
+                                            <th> NOME </th>
+                                            <th> CPF </th>
+                                            <th> DEL </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-			//			var qtdCandidato, qtdEleitor, qtdResponsavel = 0;
+            <div id="divEleitor">
+                <form method="POST" name="eleitor_form" id="eleitor_form" novalidate="novalidate">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col m6">
+                                <div class="table-header">
 
-			//Select Default Tab
-			$('ul.tabs').tabs('select_tab', 'divCandidato');
+                                    <div class="actions">
+                                        <input id="search-input-eleitor" type="text" class="search-header">
+                                        <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                    </div>
+                                </div>
+                                <table id="table-eleitor" class="search-page">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th> NOME </th>
+                                            <th> CPF </th>
+                                            <th> ADD </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="col m6">
+                                <div class="table-header">
+                                    <div class="actions">
+                                        <input id="search-input-eleitor-selecionado" type="text" class="search-header">
+                                        <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                    </div>
+                                </div>
+                                <table id="eleitor-selecionado" class="search-page">
+                                    <thead>
+                                        <tr>
+                                            <th> NOME </th>
+                                            <th> CPF </th>
+                                            <th> DEL </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-			//Fill Table with Json
-			getPessoaTable("candidato");
-			getPessoaTable("responsavel");
-			getPessoaTable("eleitor");
+            <div id="divResponsavel">
 
-			// #serch-input is a <input type="text"> element
-			$('#search-input-candidato').on('keyup', function() {
-				$('table#table-candidato').DataTable().search(this.value).draw();
-			});
-			$('#search-input-candidato-selecionado').on('keyup', function() {
-				$('table#candidato-selecionado').DataTable().search(this.value).draw();
-			});
+                <form method="POST" name="responsavel_form" id="responsavel_form" novalidate="novalidate">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col m6">
+                                <div class="table-header">
 
-			//Load Navbar and dropdown menu
-			$('#nav-bar').load("/modules/layout/navbar.html", function() {
-				$(".button-collapse").sideNav();
-				$('.dropdown-button').dropdown();
-				$("#brasao").attr("src", imageUrl + "brasao_branco.png");
-			});
+                                    <div class="actions">
+                                        <input id="search-input-responsavel" type="text" class="search-header">
+                                        <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                    </div>
+                                </div>
+                                <table id="table-responsavel" class="search-page">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th> NOME </th>
+                                            <th> CPF </th>
+                                            <th> ADD </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="col m6">
+                                <div class="table-header">
+                                    <div class="actions">
+                                        <input id="search-input-responsavel-selecionado" type="text" class="search-header">
+                                        <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                    </div>
+                                </div>
+                                <table id="responsavel-selecionado" class="search-page">
+                                    <thead>
+                                        <tr>
+                                            <th> NOME </th>
+                                            <th> CPF </th>
+                                            <th> DEL </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-			//get de form data and save
-			$("#submit").click(function(e) {
-				var data = new Object();
-				data.titulo = $("#titulo").val();
-				data.descricao = $('#descricao').val();
-				data.datainicio = $('#datainicio').val();
-				data.datatermino = $('#datatermino').val();
-				
-				var rowsCandidato = tblcandidatoselecionado.rows().data();
-				var rowsEleitor = tbleleitorselecionado.rows().data();
-				var rowsResponsavel = tblresponsavelselecionado.rows().data();
+            <div class="card-footer">
+                <div class="card-action">
+                    <a class="btn-flat waves-effect" onclick='slideOut("#cardFirst", 1350, -800, more);'>Voltar</a>
+                    <a href="#!" class="waves-effect btn right" id="submit" name="submit">Finalizar</a>
+                </div>
+            </div>
+        </div>
+        <!--		</div>-->
 
-				var idCandidato = new Array();
-				var idEleitor =  new Array();
-				var idResponsavel =  new Array();
-                
-                
-
-				$.each(rowsCandidato, function(i) {
-					idCandidato[i] = rowsCandidato[i].id;
-                    
-				});
-
-				$.each(rowsEleitor, function(i) {
-					idEleitor[i] = rowsEleitor[i].id;
-				});
-
-				$.each(rowsResponsavel, function(i) {
-					idResponsavel[i] = rowsResponsavel[i].id;
-				});
-				data.candidato = idCandidato;
-				data.eleitor = idEleitor;
-				data.responsavel = idResponsavel;
-//
-				createVotacao(data);
-			});
-
-			//Validate first vehicles data
-			$("#next").click(function() {
-
-				$("#votacao_form_partial").validate();
-				if ($("#votacao_form_partial").valid()) {
-
-					var titulo = $("#titulo").val().toUpperCase();
-					$("#infoSpan").text("Informações da votação: " + titulo);
-					slideIn("#more", 1350, -800, cardFirst);
-					var validator = $("#votacao_form_partial").validate();
-					validator.resetForm();
-				};
-			});
-
-			//Table Candidato Settings
-			tblcandidatoselecionado = $('table#candidato-selecionado').DataTable({
-				columns: [{
-					data: "nome"
-				}, {
-					data: "cpf"
-				}, {
-					data: null,
-					render: function(data, type, full, meta) {
-						return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
-					},
-				}],
-				select: true,
-				responsive: true,
-				fixedColumns: true,
-				lengthChange: false,
-				pageLength: 5,
-				dom: 'lrti<"right"p>',
-				language: {
-					url: "../../doc/Portuguese-Brasil.json"
-				}
-			});
-
-			//Table Eleitor Settings
-			tbleleitorselecionado = $('table#eleitor-selecionado').DataTable({
-				columns: [{
-					data: "nome"
-				}, {
-					data: "cpf"
-				}, {
-					data: null,
-					render: function(data, type, full, meta) {
-						return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
-					},
-				}],
-				select: true,
-				responsive: true,
-				fixedColumns: true,
-				lengthChange: false,
-				pageLength: 5,
-				dom: 'lrti<"right"p>',
-				language: {
-					url: "../../doc/Portuguese-Brasil.json"
-				}
-			});
-
-			//Table Responsavel Settings
-			tblresponsavelselecionado = $('table#responsavel-selecionado').DataTable({
-				columns: [{
-					data: "nome"
-				}, {
-					data: "cpf"
-				}, {
-					data: null,
-					render: function(data, type, full, meta) {
-						return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
-					},
-				}],
-				select: true,
-				responsive: true,
-				fixedColumns: true,
-				lengthChange: false,
-				pageLength: 5,
-				dom: 'lrti<"right"p>',
-				language: {
-					url: "../../doc/Portuguese-Brasil.json"
-				}
-			});
-
-			//Adiciona e Deleta Tabela Candidato
-			var tblcandidato = $('table#table-candidato').DataTable();
-			var tbleleitor = $('table#table-eleitor').DataTable();
-			var tblresponsavel = $('table#table-responsavel').DataTable();
+    </div>
 
 
-			$('table#table-candidato').on('click', '.btn-add', function() {
-				var row = $(this).parents('tr');
-				var data = tblcandidato.row(row).data();
-				tblcandidatoselecionado.row.add(data).draw(false);
-				tblcandidato.row(row).remove().draw(false);
-				qtdCandidato = tblcandidatoselecionado.rows().count();
-			});
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/bin/materialize.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
 
-			$('table#candidato-selecionado').on('click', '.btn-remove', function() {
-				var row = $(this).parents('tr');
-				var data = tblcandidatoselecionado.row(row).data();
-				tblcandidato.row.add(data).draw(false);
-				tblcandidatoselecionado.row(row).remove().draw(false);
-				qtdCandidato = tblcandidatoselecionado.rows().count();
+    <!--Import DataTables-->
+    <script type="text/javascript" src="/js/bin/jquery.dataTables.min.js"></script>
 
-			});
+    <script type="text/javascript" src="/js/components/general.js"></script>
+    <script type="text/javascript" src="/js/components/votacao.js"></script>
+    <script type="text/javascript" src="/js/components/pessoa.js"></script>
 
-			//Adiciona e Deleta Tabela Eleitor
-			$('table#table-eleitor').on('click', '.btn-add', function() {
-				var row = $(this).parents('tr');
-				var data = tbleleitor.row(row).data();
-				tbleleitorselecionado.row.add(data).draw(false);
-				tbleleitor.row(row).remove().draw(false);
-				qtdEleitor = tbleleitorselecionado.rows().count();
-			});
+    <script>
+        $(document).ready(function() {
 
-			$('table#eleitor-selecionado').on('click', '.btn-remove', function() {
-				var row = $(this).parents('tr');
-				var data = tbleleitorselecionado.row(row).data();
-				tbleleitor.row.add(data).draw(false);
-				tbleleitorselecionado.row(row).remove().draw(false);
-				qtdEleitor = tbleleitorselecionado.rows().count();
-			});
+            //			var qtdCandidato, qtdEleitor, qtdResponsavel = 0;
 
-			//Adiciona e Deleta Tabela Responsável
-			$('table#table-responsavel').on('click', '.btn-add', function() {
-				var row = $(this).parents('tr');
-				var data = tblresponsavel.row(row).data();
-				tblresponsavelselecionado.row.add(data).draw(false);
-				tblresponsavel.row(row).remove().draw(false);
-				qtdResponsavel = tblresponsavelselecionado.rows().count();
-			});
+            //Select Default Tab
+            $('ul.tabs').tabs('select_tab', 'divCandidato');
 
-			$('table#responsavel-selecionado').on('click', '.btn-remove', function() {
-				var row = $(this).parents('tr');
-				var data = tblresponsavelselecionado.row(row).data();
-				tblresponsavel.row.add(data).draw(false);
-				tblresponsavelselecionado.row(row).remove().draw(false);
-				qtdResponsavel = tblresponsavelselecionado.rows().count();
-			});
+            //Fill Table with Json
+            getPessoaTable("candidato");
+            getPessoaTable("responsavel");
+            getPessoaTable("eleitor");
 
-		});
+            // #serch-input is a <input type="text"> element
+            $('#search-input-candidato').on('keyup', function() {
+                $('table#table-candidato').DataTable().search(this.value).draw();
+            });
+            $('#search-input-candidato-selecionado').on('keyup', function() {
+                $('table#candidato-selecionado').DataTable().search(this.value).draw();
+            });
 
-	</script>
+            //Load Navbar and dropdown menu
+            $('#nav-bar').load("/modules/layout/navbar.html", function() {
+                $(".button-collapse").sideNav();
+                $('.dropdown-button').dropdown();
+                $("#brasao").attr("src", imageUrl + "brasao_branco.png");
+            });
+
+            //get de form data and save
+            $("#submit").click(function(e) {
+                var data = new Object();
+                data.titulo = $("#titulo").val();
+                data.descricao = $('#descricao').val();
+                data.datainicio = $('#datainicio').val();
+                data.datatermino = $('#datatermino').val();
+
+                var rowsCandidato = tblcandidatoselecionado.rows().data();
+                var rowsEleitor = tbleleitorselecionado.rows().data();
+                var rowsResponsavel = tblresponsavelselecionado.rows().data();
+
+                var idCandidato = new Array();
+                var idEleitor = new Array();
+                var idResponsavel = new Array();
+
+
+
+                $.each(rowsCandidato, function(i) {
+                    idCandidato[i] = rowsCandidato[i].id;
+                });
+
+                $.each(rowsEleitor, function(i) {
+                    idEleitor[i] = rowsEleitor[i].id;
+                });
+
+                $.each(rowsResponsavel, function(i) {
+                    idResponsavel[i] = rowsResponsavel[i].id;
+                });
+                data.candidato = idCandidato;
+                data.eleitor = idEleitor;
+                data.responsavel = idResponsavel;
+                //
+                createVotacao(data);
+            });
+
+            //Validate first vehicles data
+            $("#next").click(function() {
+
+                $("#votacao_form_partial").validate();
+                if ($("#votacao_form_partial").valid()) {
+
+                    var titulo = $("#titulo").val().toUpperCase();
+                    $("#infoSpan").text("Informações da votação: " + titulo);
+                    slideIn("#more", 1350, -800, cardFirst);
+                    var validator = $("#votacao_form_partial").validate();
+                    validator.resetForm();
+                };
+            });
+
+            //Table Candidato Settings
+            tblcandidatoselecionado = $('table#candidato-selecionado').DataTable({
+                columns: [{
+                    data: "nome"
+                }, {
+                    data: "cpf"
+                }, {
+                    data: null,
+                    render: function(data, type, full, meta) {
+                        return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
+                    },
+                }],
+                select: true,
+                responsive: true,
+                fixedColumns: true,
+                lengthChange: false,
+                pageLength: 5,
+                dom: 'lrti<"right"p>',
+                language: {
+                    url: "../../doc/Portuguese-Brasil.json"
+                }
+            });
+
+            //Table Eleitor Settings
+            tbleleitorselecionado = $('table#eleitor-selecionado').DataTable({
+                columns: [{
+                    data: "nome"
+                }, {
+                    data: "cpf"
+                }, {
+                    data: null,
+                    render: function(data, type, full, meta) {
+                        return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
+                    },
+                }],
+                select: true,
+                responsive: true,
+                fixedColumns: true,
+                lengthChange: false,
+                pageLength: 5,
+                dom: 'lrti<"right"p>',
+                language: {
+                    url: "../../doc/Portuguese-Brasil.json"
+                }
+            });
+
+            //Table Responsavel Settings
+            tblresponsavelselecionado = $('table#responsavel-selecionado').DataTable({
+                columns: [{
+                    data: "nome"
+                }, {
+                    data: "cpf"
+                }, {
+                    data: null,
+                    render: function(data, type, full, meta) {
+                        return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
+                    },
+                }],
+                select: true,
+                responsive: true,
+                fixedColumns: true,
+                lengthChange: false,
+                pageLength: 5,
+                dom: 'lrti<"right"p>',
+                language: {
+                    url: "../../doc/Portuguese-Brasil.json"
+                }
+            });
+
+            //Adiciona e Deleta Tabela Candidato
+            var tblcandidato = $('table#table-candidato').DataTable();
+            var tbleleitor = $('table#table-eleitor').DataTable();
+            var tblresponsavel = $('table#table-responsavel').DataTable();
+
+
+            $('table#table-candidato').on('click', '.btn-add', function() {
+                var row = $(this).parents('tr');
+                var data = tblcandidato.row(row).data();
+                tblcandidatoselecionado.row.add(data).draw(false);
+                tblcandidato.row(row).remove().draw(false);
+                qtdCandidato = tblcandidatoselecionado.rows().count();
+            });
+
+            $('table#candidato-selecionado').on('click', '.btn-remove', function() {
+                var row = $(this).parents('tr');
+                var data = tblcandidatoselecionado.row(row).data();
+                tblcandidato.row.add(data).draw(false);
+                tblcandidatoselecionado.row(row).remove().draw(false);
+                qtdCandidato = tblcandidatoselecionado.rows().count();
+
+            });
+
+            //Adiciona e Deleta Tabela Eleitor
+            $('table#table-eleitor').on('click', '.btn-add', function() {
+                var row = $(this).parents('tr');
+                var data = tbleleitor.row(row).data();
+                tbleleitorselecionado.row.add(data).draw(false);
+                tbleleitor.row(row).remove().draw(false);
+                qtdEleitor = tbleleitorselecionado.rows().count();
+            });
+
+            $('table#eleitor-selecionado').on('click', '.btn-remove', function() {
+                var row = $(this).parents('tr');
+                var data = tbleleitorselecionado.row(row).data();
+                tbleleitor.row.add(data).draw(false);
+                tbleleitorselecionado.row(row).remove().draw(false);
+                qtdEleitor = tbleleitorselecionado.rows().count();
+            });
+
+            //Adiciona e Deleta Tabela Responsável
+            $('table#table-responsavel').on('click', '.btn-add', function() {
+                var row = $(this).parents('tr');
+                var data = tblresponsavel.row(row).data();
+                tblresponsavelselecionado.row.add(data).draw(false);
+                tblresponsavel.row(row).remove().draw(false);
+                qtdResponsavel = tblresponsavelselecionado.rows().count();
+            });
+
+            $('table#responsavel-selecionado').on('click', '.btn-remove', function() {
+                var row = $(this).parents('tr');
+                var data = tblresponsavelselecionado.row(row).data();
+                tblresponsavel.row.add(data).draw(false);
+                tblresponsavelselecionado.row(row).remove().draw(false);
+                qtdResponsavel = tblresponsavelselecionado.rows().count();
+            });
+
+        });
+
+    </script>
 
 </body>
 

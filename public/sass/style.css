@@ -1,11 +1,11 @@
-/*With empty fiel validation*/
+/*With empty field validation*/
 
 label[data-class=select]:after {
-  content: attr(data-error);
-  color: #F44336;
-  top: 85px;
-  position: relative;
-  opacity: 1;
+    content: attr(data-error);
+    color: #F44336;
+    top: 85px;
+    position: relative;
+    opacity: 1;
 }
 
 label {
@@ -33,6 +33,7 @@ label:not(.active):after {
     transform: translateY(-140%);
 }
 
+
 /*Hide the input number button    */
 
 input[type=number]::-webkit-outer-spin-button,
@@ -40,28 +41,42 @@ input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type=number] {
     -moz-appearance: textfield;
 }
 
+
 /*------------------------------------*/
+
 
 /*Old Votacao styles*/
 
- .modalfoto { 
-        width: 50% !important ;
-        max-height: 100% !important ;
-        overflow-y: hidden !important ;
-    }
-    
-.upload-btn { position: absolute !important;
+.modal-table {
+    width: 80% !important;
+    max-height: 100% !important;
+    overflow-y: hidden !important;
+}
+
+
+/* increase the width, height and prevent vertical scroll! However, i don't recommend this, its better to turn on vertical scrolling. */
+
+.modalfoto {
+    width: 50% !important;
+    max-height: 100% !important;
+    overflow-y: hidden !important;
+}
+
+.upload-btn {
+    position: absolute !important;
     right: 38% !important;
     top: 210px !important;
 }
-    
+
 .img-preview {
     width: 200px !important;
 }
+
 
 /*------------------------------------------*/
 
@@ -77,20 +92,24 @@ input[type=number] {
     bottom: 0;
     margin: auto;
 }
+
 .modal-vehicle {
     width: 30% !important;
 }
+
 .card-title {
     line-height: 48px !important;
     font-size: 24px !important;
     font-weight: 300 !important;
 }
 
+
 /*Uset to google loader*/
 
 body {
     background-color: #eee;
 }
+
 .showbox {
     position: relative;
     top: 0;
@@ -98,17 +117,20 @@ body {
     left: 0;
     right: 0;
 }
+
 .loader {
     position: absolute;
     margin-left: -20%;
     margin-top: 30%;
     width: 40px;
 }
+
 .loader:before {
     content: '';
     display: block;
     padding-top: 100%;
 }
+
 .circular {
     -webkit-animation: rotate 2s linear infinite;
     animation: rotate 2s linear infinite;
@@ -120,6 +142,7 @@ body {
     bottom: 0;
     left: 0;
 }
+
 .path {
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
@@ -127,18 +150,21 @@ body {
     animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
     stroke-linecap: round;
 }
+
 @-webkit-keyframes rotate {
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
 }
+
 @keyframes rotate {
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
 }
+
 @-webkit-keyframes dash {
     0% {
         stroke-dasharray: 1, 200;
@@ -153,6 +179,7 @@ body {
         stroke-dashoffset: -124px;
     }
 }
+
 @keyframes dash {
     0% {
         stroke-dasharray: 1, 200;
@@ -167,6 +194,7 @@ body {
         stroke-dashoffset: -124px;
     }
 }
+
 @-webkit-keyframes color {
     100%,
     0% {
@@ -183,6 +211,7 @@ body {
         stroke: #ffa700;
     }
 }
+
 @keyframes color {
     100%,
     0% {
