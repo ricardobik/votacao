@@ -116,13 +116,11 @@
     {
       "titulo": "test",
       "descricao": "tet",
-      "datainicio": "tete",
-      "datatermino": "tete",
+      "datainicio": "05/02/2017",
+      "datatermino": "10/02/2017",
       "candidato": [
         6,
         7,
-        8,
-        9,
         10,
         11,
         12,

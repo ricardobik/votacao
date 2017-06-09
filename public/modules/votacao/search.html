@@ -27,7 +27,7 @@
                 <div class="card material-table">
                     <div class="card-content">
                         <div class="table-header">
-                            <span class="card-title">Pesquisar votacao</span>
+                            <span class="card-title">Pesquisar votação</span>
                             <div class="actions">
                                 <input id="search-input" type="text" class="search-header">
                                 <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
@@ -379,8 +379,6 @@
 
             //Change selected and unselected eleitores
             $('table#table-eleitor').on('click', '.btn-add', function() {
-                //                var tblEleitorselecionado = $('table#eleitor-selecionado').DataTable();
-                //                var tableEleitor = $('table#table-eleitor').DataTable();
                 var row = $(this).parents('tr');
                 var data = tableEleitor.row(row).data();
 
@@ -457,7 +455,11 @@
                 data.descricao = $('#descricao').val();
                 data.datainicio = $('#datainicio').val();
                 data.datatermino = $('#datatermino').val();
-                updateVotacao(data);
+                data.candidato = votCandidato;
+                data.eleitor = votEleitor;
+                data.responsavel = votResponsavel;
+                
+                updateVotacao($update.id, data);
             });
 
             //get de form data and save

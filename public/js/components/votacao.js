@@ -209,8 +209,9 @@ function updateVotacao(id, data) {
             $.ajax({
                 type: "PUT",
                 url: urlApi + "votacao/" + id,
-                data: data,
+                data: JSON.stringify(data),
                 dataType: "json",
+                contentType: "application/json",
 
                 //if received a response from the server
                 success: function (response) {
@@ -249,7 +250,8 @@ function updateVotacaoPessoa(id, data) {
         confirmButtonText: "Salvar",
         closeOnConfirm: false,
         html: false
-    }, function () {
+    },
+         function () {
 
         $.ajax({
             type: "PUT",
