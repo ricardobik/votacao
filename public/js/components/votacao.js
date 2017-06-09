@@ -39,6 +39,11 @@ $("#votacao_form_partial").validate({
 });
 
 //Rules and Messages to Validate
+$("#votacao_form_pessoa").validate({
+
+});
+
+//Rules and Messages to Validate
 $("#votacao_form").validate({
     ignore: [],
     debug: true,
@@ -161,6 +166,7 @@ function getVotacao(id) {
         success: function (resp) {
 
             $("#id").val(resp.data.id);
+            $("#idPessoa").val(resp.data.id);
             $("#titulo").val(resp.data.titulo);
             $("#descricao").val(resp.data.descricao);
             $("#datainicio").val(resp.data.datainicio);
@@ -169,7 +175,7 @@ function getVotacao(id) {
             votCandidato = resp.data.candidato;
             votResponsavel = resp.data.responsavel;
             votEleitor = resp.data.eleitor;
-            
+
             //Reload Material Form
             Materialize.updateTextFields();
 
@@ -184,7 +190,6 @@ function getVotacao(id) {
 
 //Update function
 function updateVotacao(id, data) {
-
 
     //do AJAX request
     $("#votacao_form").validate();
@@ -224,6 +229,52 @@ function updateVotacao(id, data) {
         });
 
     }
+    //Reload Material Form
+    Materialize.updateTextFields();
+
+}
+
+function updateVotacaoPessoa(id, data) {
+
+    //do AJAX request
+    //    $("#votacao_form_pessoa").validate();
+    //    if (!$("#votacao_form_pessoa").valid()) {
+
+    swal({
+        title: "Deseja salvar essas alterações?",
+        text: "A votação tem:\nCANDIDATOS: " + qtdCandidato + "\nELEITORES: " + qtdEleitor + "\nRESPONSÁVEIS: " + qtdResponsavel,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Salvar",
+        closeOnConfirm: false,
+        html: false
+    }, function () {
+
+        $.ajax({
+            type: "PUT",
+            url: urlApi + "votacao/" + id,
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+
+            //if received a response from the server
+            success: function (response) {
+                swal("Pronto!",
+                    "As alterações foram salvas com sucesso.",
+                    "success");
+
+                //Reload dataTable
+                $('#table_votacao').DataTable().ajax.reload();
+                $('#modal-edit-pessoa').modal('close');
+
+            }
+
+        });
+
+    });
+
+    //    }
     //Reload Material Form
     Materialize.updateTextFields();
 

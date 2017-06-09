@@ -42,18 +42,31 @@ $("#pessoa_form").validate({
     }
 });
 
+//var tblCandidatoselecionado = $('table#candidato-selecionado').DataTable();
+//var tblEleitorselecionado = $('table#eleitor-selecionado').DataTable();
+//var tblResponsavelSelecionado = $('table#responsavel-selecionado').DataTable();
+
+//var tableCandidato = $('table#table-candidato').DataTable();
+//var tableEleitor = $('table#table-eleitor').DataTable();
+//var tableResponsavel = $('table#table-responsavel').DataTable();
+
 //Fill table pessoa
 function getPessoaTable(tipo) {
+    
 
     if (!!tipo) {
         var url = urlApi + 'pessoa?' + tipo + '=true';
         var tabela = 'table#table-' + tipo + '';
-
+        
+        if ( $.fn.DataTable.fnIsDataTable(tabela) ) {
+//            console.log("já existe");
+        }
         //Populates Table with Json
 
         switch (tipo) {
             case "candidato":
                 tableCandidato = $('table#table-' + tipo).DataTable({
+                    destroy: true,
                     ajax: {
 
                         url: url,
@@ -61,24 +74,28 @@ function getPessoaTable(tipo) {
                         dataType: 'json'
 
                     },
-                    columns: [{
-                        data: "id",
-                        visible: true,
-                        searchable: false,
-                        width: "10%"
-			}, {
-                        data: "nome",
-                        width: "40%"
-			}, {
-                        data: "cpf",
-                        width: "40%"
-            }, {
-                        data: null,
-                        render: function (data, type, full, meta) {
-                            return '<a href="#" class=" table-action btn-add"><i class="material-icons green-text">add</i></a>';
+                    columns: [
+                        {
+                            data: "id",
+                            visible: true,
+                            searchable: false,
+                            width: "10%"
+			             },
+                        {
+                            data: "nome",
+                            width: "40%"
+			             },
+                        {
+                            data: "cpf",
+                            width: "40%"
                         },
-                        searchable: false
-			}],
+                        {
+                            data: null,
+                            render: function (data, type, full, meta) {
+                                return '<a href="#" class=" table-action btn-add"><i class="material-icons green-text">add</i></a>';
+                            },
+                            searchable: false
+			             }],
                     fnInitComplete: function (oSettings, json) {
                         var row = tableCandidato.row();
                         var rowNode = row.node();
@@ -100,7 +117,8 @@ function getPessoaTable(tipo) {
 
                         });
 
-                        var tblcandidatoselecionado = $('table#candidato-selecionado').DataTable({
+                        tblCandidatoselecionado = $('table#candidato-selecionado').DataTable({
+                            destroy: true,
 
                             columns: [{
                                 data: "id",
@@ -122,8 +140,9 @@ function getPessoaTable(tipo) {
 			            }],
                             fnInitComplete: function (oSettings, json) {
                                 var remove = [];
+                                tblCandidatoselecionado.clear();
                                 $.each(arr, function (index, value) {
-                                    tblcandidatoselecionado.row.add(value.Candidato).draw(false);
+                                    tblCandidatoselecionado.row.add(value.Candidato).draw(false);
                                     remove[index] = value.Remove;
                                 });
                                 tableCandidato.rows(remove).remove().draw(false);
@@ -154,6 +173,7 @@ function getPessoaTable(tipo) {
                 break;
             case "eleitor":
                 tableEleitor = $('table#table-' + tipo).DataTable({
+                    destroy: true,
                     ajax: {
                         url: url,
                         contentType: 'application/json; charset=UTF-8',
@@ -198,7 +218,8 @@ function getPessoaTable(tipo) {
 
                         });
 
-                        var tbleleitorselecionado = $('table#eleitor-selecionado').DataTable({
+                        tblEleitorselecionado = $('table#eleitor-selecionado').DataTable({
+                            destroy: true,
 
                             columns: [{
                                 data: "id",
@@ -221,8 +242,9 @@ function getPessoaTable(tipo) {
                             fnInitComplete: function (oSettings, json) {
 
                                 var remove = [];
+                                tblEleitorselecionado.clear();
                                 $.each(arr, function (index, value) {
-                                    tbleleitorselecionado.row.add(value.Eleitor).draw(false);
+                                    tblEleitorselecionado.row.add(value.Eleitor).draw(false);
                                     remove[index] = value.Remove;
                                 });
                                 tableEleitor.rows(remove).remove().draw(false);
@@ -252,8 +274,8 @@ function getPessoaTable(tipo) {
                 });
                 break;
             case "responsavel":
-                console.log(tipo);
                 tableResponsavel = $('table#table-' + tipo).DataTable({
+                    destroy: true,
                     ajax: {
                         url: url,
                         contentType: 'application/json; charset=UTF-8',
@@ -298,7 +320,8 @@ function getPessoaTable(tipo) {
 
                         });
 
-                        var tblresponsavelselecionado = $('table#responsavel-selecionado').DataTable({
+                        tblResponsavelSelecionado = $('table#responsavel-selecionado').DataTable({
+                            destroy: true,
 
                             columns: [{
                                 data: "id",
@@ -321,11 +344,16 @@ function getPessoaTable(tipo) {
                             fnInitComplete: function (oSettings, json) {
 
                                 var remove = [];
+                                tblResponsavelSelecionado.clear();
                                 $.each(arr, function (index, value) {
-                                    tblresponsavelselecionado.row.add(value.Responsavel).draw(false);
+                                    tblResponsavelSelecionado.row.add(value.Responsavel).draw(false);
                                     remove[index] = value.Remove;
                                 });
                                 tableResponsavel.rows(remove).remove().draw(false);
+
+                                qtdCandidato = tblCandidatoselecionado.rows().count();
+                                qtdEleitor = tblEleitorselecionado.rows().count();
+                                qtdResponsavel = tblResponsavelSelecionado.rows().count();
                             },
                             select: true,
                             responsive: true,
@@ -354,8 +382,6 @@ function getPessoaTable(tipo) {
             default:
                 //                code block
         }
-
-
 
     } else {
         //Populates Table with Json

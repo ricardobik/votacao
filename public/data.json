@@ -114,10 +114,10 @@
   ],
   "votacao": [
     {
-      "titulo": "titulo",
-      "descricao": "desc",
-      "datainicio": "data",
-      "datatermino": "data",
+      "titulo": "test",
+      "descricao": "tet",
+      "datainicio": "tete",
+      "datatermino": "tete",
       "candidato": [
         6,
         7,
@@ -128,19 +128,16 @@
         12,
         13,
         14,
-        4,
-        15
+        15,
+        16
       ],
       "eleitor": [
-        16,
-        9,
-        14,
         4,
-        15
+        9,
+        16
       ],
       "responsavel": [
-        9,
-        4
+        9
       ],
       "id": 1
     }

@@ -70,7 +70,6 @@
             <div class="modal-content">
                 <span class="card-title">Editar</span>
 
-
                 <div class="row">
                     <div class="input-field col s1">
                         <input disabled name="id" id="id" type="text">
@@ -113,21 +112,22 @@
                 </div>
             </div>
         </div>
+    </form>
 
+    <form method="POST" name="votacao_form" action="" id="votacao_form_pessoa">
         <div id="modal-edit-pessoa" class="modal modal-fixed-footer material-table modal-table">
             <div class="card-content">
                 <div class="row">
+                    <div class="col s12">
+                        <ul class="tabs">
+                            <li class="tab col s4"><a id="firstTab" class="active" href="#divCandidato">CANDIDATO</a></li>
+                            <li class="tab col s4"><a href="#divEleitor">ELEITOR</a></li>
+                            <li class="tab col s4"><a href="#divResponsavel">RESPONSÁVEL</a></li>
+                        </ul>
 
-                    <ul class="tabs">
-                        <li class="tab col s3"><a id="firstTab" class="active" href="#divCandidato">CANDIDATO</a></li>
-                        <li class="tab col s3"><a href="#divEleitor">ELEITOR</a></li>
-                        <li class="tab col s3"><a href="#divResponsavel">RESPONSÁVEL</a></li>
-                    </ul>
-
-
-                    <div id="divCandidato">
-                        <form method="POST" name="candidato_form" id="candidato_form" novalidate="novalidate">
+                        <div id="divCandidato">
                             <div class="card-content">
+                                <span class="card-title">Selecione os candidatos</span>
                                 <div class="row">
                                     <div class="col m6">
                                         <div class="table-header">
@@ -170,12 +170,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
 
-                    <div id="divEleitor">
-                        <form method="POST" name="eleitor_form" id="eleitor_form" novalidate="novalidate">
+                        <div id="divEleitor">
                             <div class="card-content">
+                                <span class="card-title">Selecione os eleitores</span>
                                 <div class="row">
                                     <div class="col m6">
                                         <div class="table-header">
@@ -185,7 +184,7 @@
                                                 <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
                                             </div>
                                         </div>
-                                        <table id="table-eleitor" class="search-page">
+                                        <table id="table-eleitor" class="search-page-eleitor">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -204,7 +203,7 @@
                                                 <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
                                             </div>
                                         </div>
-                                        <table id="eleitor-selecionado" class="search-page">
+                                        <table id="eleitor-selecionado" class="search-page-eleitor-selecionado">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -218,13 +217,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
 
-                    <div id="divResponsavel">
-
-                        <form method="POST" name="responsavel_form" id="responsavel_form" novalidate="novalidate">
+                        <div id="divResponsavel">
                             <div class="card-content">
+                                <span class="card-title">Selecione os responsáveis</span>
                                 <div class="row">
                                     <div class="col m6">
                                         <div class="table-header">
@@ -234,7 +231,7 @@
                                                 <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
                                             </div>
                                         </div>
-                                        <table id="table-responsavel" class="search-page">
+                                        <table id="table-responsavel" class="search-page-responsavel">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -253,7 +250,7 @@
                                                 <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
                                             </div>
                                         </div>
-                                        <table id="responsavel-selecionado" class="search-page">
+                                        <table id="responsavel-selecionado" class="search-page-responsavel-selecionado">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -267,27 +264,20 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
 
-                </div>
-                <div class="modal-footer">
-                    <div class="card-action right-align">
-                        <div class="" id="divDelete">
-                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
-                            <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deletePessoa">Deletar</a>
-                            <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="editPessoa">Editar</a>
-
-                        </div>
-                        <div class="hide" id="divEdit">
-                            <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="update">Salvar</a>
-                            <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
+                    <div class="modal-footer">
+                        <div class="card-action right-align">
+                            <div class="hide" id="divEditPessoa">
+                                <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="updatePessoa">Salvar</a>
+                                <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancelPessoa">Cancelar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </form>
 
     <!--Import jQuery before materialize.js-->
@@ -324,14 +314,23 @@
                     $('#firstTab').click();
                 },
                 complete: function() {
-//                    alert('Closed');
+                    //                    alert('Closed');
                 } // Callback for Modal close
             });
-
 
             // #serch-input is a <input type="text"> element
             $('#search-input').on('keyup', function() {
                 table_votacao.search(this.value).draw();
+            });
+            
+            // #serch-input is a <input type="text"> element
+            $('#search-input-candidato').on('keyup', function() {
+                tableCandidato.search(this.value).draw();
+            });
+            
+            // #serch-input is a <input type="text"> element
+            $('#search-input-candidato-selecionado').on('keyup', function() {
+                tblCandidatoselecionado.search(this.value).draw();
             });
 
             //Load Navbar and dropdown menu
@@ -356,36 +355,68 @@
                     $update = table_votacao.row(this).data();
                 }
             });
-
-            //Get Pessoas to Edit/Delete
-            $('#callModalEditPessoa').on('click', function() {
-                //Select Default Tab
-                $('ul.tabs').tabs('select_tab', 'divCandidato');
-
-                getVotacao($update.id);
-                getPessoaTable("candidato");
-                getPessoaTable("eleitor");
-                getPessoaTable("responsavel");
-
-            });
-
+            
+            
+            //Change selected and unselected candidatos
             $('table#table-candidato').on('click', '.btn-add', function() {
                 var row = $(this).parents('tr');
                 var data = tableCandidato.row(row).data();
-                tblcandidatoselecionado.row.add(data).draw(false);
+
+                tblCandidatoselecionado.row.add(data).draw(false);
                 tableCandidato.row(row).remove().draw(false);
-                qtdCandidato = tblcandidatoselecionado.rows().count();
+                qtdCandidato = tblCandidatoselecionado.rows().count();
             });
 
             $('table#candidato-selecionado').on('click', '.btn-remove', function() {
                 var row = $(this).parents('tr');
-                var data = tblcandidatoselecionado.row(row).data();
+                var data = tblCandidatoselecionado.row(row).data();
+
                 tableCandidato.row.add(data).draw(false);
-                tblcandidatoselecionado.row(row).remove().draw(false);
-                qtdCandidato = tblcandidatoselecionado.rows().count();
+                tblCandidatoselecionado.row(row).remove().draw(false);
+                qtdCandidato = tblCandidatoselecionado.rows().count();
 
             });
 
+            //Change selected and unselected eleitores
+            $('table#table-eleitor').on('click', '.btn-add', function() {
+                //                var tblEleitorselecionado = $('table#eleitor-selecionado').DataTable();
+                //                var tableEleitor = $('table#table-eleitor').DataTable();
+                var row = $(this).parents('tr');
+                var data = tableEleitor.row(row).data();
+
+                tblEleitorselecionado.row.add(data).draw(false);
+                tableEleitor.row(row).remove().draw(false);
+                qtdEleitor = tblEleitorselecionado.rows().count();
+            });
+
+            $('table#eleitor-selecionado').on('click', '.btn-remove', function() {
+                var row = $(this).parents('tr');
+                var data = tblEleitorselecionado.row(row).data();
+
+                tableEleitor.row.add(data).draw(false);
+                tblEleitorselecionado.row(row).remove().draw(false);
+                qtdEleitor = tblEleitorselecionado.rows().count();
+
+            });
+
+            //Change selected and unselected responsaveis
+            $('table#table-responsavel').on('click', '.btn-add', function() {
+                var row = $(this).parents('tr');
+                var data = tableResponsavel.row(row).data();
+
+                tblResponsavelSelecionado.row.add(data).draw(false);
+                tableResponsavel.row(row).remove().draw(false);
+                qtdResponsavel = tblResponsavelSelecionado.rows().count();
+            });
+
+            $('table#responsavel-selecionado').on('click', '.btn-remove', function() {
+                var row = $(this).parents('tr');
+                var data = tblResponsavelSelecionado.row(row).data();
+
+                tableResponsavel.row.add(data).draw(false);
+                tblResponsavelSelecionado.row(row).remove().draw(false);
+                qtdResponsavel = tblResponsavelSelecionado.rows().count();
+            });
 
             //Get id from json and populate the modal field
             $('#callModalEdit').on('click', function() {
@@ -394,6 +425,19 @@
                 $("form :input").prop("disabled", true);
 
                 getVotacao($update.id);
+            });
+
+            //Get Pessoas to Edit/Delete
+            $('#callModalEditPessoa').on('click', function() {
+                $("#divEditPessoa").removeClass("hide");
+                $("form :input").prop("disabled", false);
+
+                getVotacao($update.id);
+
+                getPessoaTable("candidato");
+                getPessoaTable("eleitor");
+                getPessoaTable("responsavel");
+
             });
 
             $('#edit').on('click', function() {
@@ -416,13 +460,50 @@
                 updateVotacao(data);
             });
 
+            //get de form data and save
+            $("#updatePessoa").click(function(e) {
+                var data = new Object();
+                //                var tblCandidatoselecionado = $('table#candidato-selecionado').DataTable();
+                //                var tblEleitorselecionado = $('table#eleitor-selecionado').DataTable();
+                //                var tblResponsavelSelecionado = $('table#responsavel-selecionado').DataTable();
+                data.titulo = $("#titulo").val();
+                data.descricao = $('#descricao').val();
+                data.datainicio = $('#datainicio').val();
+                data.datatermino = $('#datatermino').val();
+
+                var rowsCandidato = tblCandidatoselecionado.rows().data();
+                var rowsEleitor = tblEleitorselecionado.rows().data();
+                var rowsResponsavel = tblResponsavelSelecionado.rows().data();
+
+                var idCandidato = new Array();
+                var idEleitor = new Array();
+                var idResponsavel = new Array();
+
+                $.each(rowsCandidato, function(i) {
+                    idCandidato[i] = rowsCandidato[i].id;
+                });
+
+                $.each(rowsEleitor, function(i) {
+                    idEleitor[i] = rowsEleitor[i].id;
+                });
+
+                $.each(rowsResponsavel, function(i) {
+                    idResponsavel[i] = rowsResponsavel[i].id;
+                });
+                data.candidato = idCandidato;
+                data.eleitor = idEleitor;
+                data.responsavel = idResponsavel;
+                //
+                updateVotacaoPessoa($update.id, data);
+            });
+
             //Delete request
             $('#delete').on('click', function() {
                 deleteVotacao($update.id);
             });
 
             //Cancel request
-            $('#cancel').on('click', function() {
+            $('#cancelPessoa').on('click', function() {
                 resetForm($("#votacao_form"));
                 $("#votacao_form").validate().resetForm();
             });
