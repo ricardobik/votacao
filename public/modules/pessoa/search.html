@@ -38,9 +38,6 @@
 								<tr>
 									<th> NOME </th>
 									<th> CPF </th>
-									<th> CANDIDATO </th>
-									<th> ELEITOR </th>
-									<th> RESPONSÁVEL </th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -89,22 +86,7 @@
 						<label for="cpf">Cpf</label>
 					</div>
 				</div>
-				<!--Checkboxes-->
-				<div class="row check-row">
-					<div class="col m4">
-						<input name="candidato" type="checkbox" id="candidato" />
-						<label for="candidato">Candidato</label>
-					</div>
-					<div class="col m4">
-						<input name="eleitor" type="checkbox" id="eleitor" />
-						<label for="eleitor">Eleitor</label>
-					</div>
-					<div class="col m4">
-						<input name="responsavel" type="checkbox" id="responsavel" />
-						<label for="responsavel">Responsável</label>
-					</div>
-				</div>
-
+				
 			</div>
 			<div class="modal-footer">
 				<div class="card-action right-align">
@@ -123,14 +105,13 @@
 	</form>
 
 	<!--Import jQuery before materialize.js-->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/js/bin/materialize.min.js"></script>
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
 
 	<!--Import DataTables-->
 	<script type="text/javascript" src="/js/bin/jquery.dataTables.min.js"></script>
-
 	<script type="text/javascript" src="/js/components/general.js"></script>
 	<script type="text/javascript" src="/js/components/pessoa.js"></script>
 
@@ -205,9 +186,6 @@
 				data.nome = $("#nome").val();
 				data.cpf = $('#cpf').val()
 //				data.foto = $("#foto").val();
-				data.candidato = $('#candidato').prop('checked');
-				data.eleitor = $('#eleitor').prop('checked');
-				data.responsavel = $('#responsavel').prop('checked');
 				updatePessoa(data);
 			});
 

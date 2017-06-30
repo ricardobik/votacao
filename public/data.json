@@ -5,6 +5,13 @@
       "cpf": 22211336688,
       "senha": "olha lá",
       "id": 4
+    },
+    {
+      "nome": "ricardo rodrigo teixeira",
+      "admin": "true",
+      "usuario": "ricardobik",
+      "senha": "uai",
+      "id": 5
     }
   ],
   "pessoa": [
@@ -103,13 +110,9 @@
       "id": 15
     },
     {
-      "nome": "aaaasssssss",
-      "cpf": "22211368884",
-      "foto": "",
-      "candidato": "true",
-      "eleitor": "true",
-      "responsavel": "false",
-      "id": 16
+      "id": 16,
+      "nome": "aaaasssssssucar",
+      "cpf": "22211368884"
     }
   ],
   "votacao": [
@@ -138,6 +141,57 @@
         9
       ],
       "id": 1
+    },
+    {
+      "titulo": "titulo",
+      "descricao": "description",
+      "datainicio": "date",
+      "datatermino": "date final",
+      "candidato": [
+        9,
+        6,
+        7,
+        8
+      ],
+      "eleitor": [
+        6,
+        7,
+        8,
+        4
+      ],
+      "id": 2
+    },
+    {
+      "titulo": "teste 546",
+      "descricao": "descricao 546",
+      "datainicio": "data inicion",
+      "datatermino": "data final",
+      "candidato": [
+        4,
+        6
+      ],
+      "eleitor": [
+        6,
+        7,
+        4
+      ],
+      "id": 3
+    },
+    {
+      "titulo": "tite",
+      "descricao": "descricao",
+      "datainicio": "data",
+      "datatermino": "data fim",
+      "candidato": [
+        4,
+        6
+      ],
+      "eleitor": [
+        6,
+        7,
+        4
+      ],
+      "id": 4
     }
   ]
 }

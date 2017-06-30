@@ -122,7 +122,6 @@
                         <ul class="tabs">
                             <li class="tab col s4"><a id="firstTab" class="active" href="#divCandidato">CANDIDATO</a></li>
                             <li class="tab col s4"><a href="#divEleitor">ELEITOR</a></li>
-                            <li class="tab col s4"><a href="#divResponsavel">RESPONSÁVEL</a></li>
                         </ul>
 
                         <div id="divCandidato">
@@ -219,53 +218,6 @@
                             </div>
                         </div>
 
-                        <div id="divResponsavel">
-                            <div class="card-content">
-                                <span class="card-title">Selecione os responsáveis</span>
-                                <div class="row">
-                                    <div class="col m6">
-                                        <div class="table-header">
-
-                                            <div class="actions">
-                                                <input id="search-input-responsavel" type="text" class="search-header">
-                                                <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-                                            </div>
-                                        </div>
-                                        <table id="table-responsavel" class="search-page-responsavel">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th> NOME </th>
-                                                    <th> CPF </th>
-                                                    <th> ADD </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col m6">
-                                        <div class="table-header">
-                                            <div class="actions">
-                                                <input id="search-input-responsavel-selecionado" type="text" class="search-header">
-                                                <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-                                            </div>
-                                        </div>
-                                        <table id="responsavel-selecionado" class="search-page-responsavel-selecionado">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th> NOME </th>
-                                                    <th> CPF </th>
-                                                    <th> DEL </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="modal-footer">
                         <div class="card-action right-align">
@@ -385,6 +337,9 @@
                 tblEleitorselecionado.row.add(data).draw(false);
                 tableEleitor.row(row).remove().draw(false);
                 qtdEleitor = tblEleitorselecionado.rows().count();
+                
+                
+                addPessoaVotacao(data.id, "eleitor");
             });
 
             $('table#eleitor-selecionado').on('click', '.btn-remove', function() {
@@ -395,25 +350,6 @@
                 tblEleitorselecionado.row(row).remove().draw(false);
                 qtdEleitor = tblEleitorselecionado.rows().count();
 
-            });
-
-            //Change selected and unselected responsaveis
-            $('table#table-responsavel').on('click', '.btn-add', function() {
-                var row = $(this).parents('tr');
-                var data = tableResponsavel.row(row).data();
-
-                tblResponsavelSelecionado.row.add(data).draw(false);
-                tableResponsavel.row(row).remove().draw(false);
-                qtdResponsavel = tblResponsavelSelecionado.rows().count();
-            });
-
-            $('table#responsavel-selecionado').on('click', '.btn-remove', function() {
-                var row = $(this).parents('tr');
-                var data = tblResponsavelSelecionado.row(row).data();
-
-                tableResponsavel.row.add(data).draw(false);
-                tblResponsavelSelecionado.row(row).remove().draw(false);
-                qtdResponsavel = tblResponsavelSelecionado.rows().count();
             });
 
             //Get id from json and populate the modal field
@@ -434,7 +370,6 @@
 
                 getPessoaTable("candidato");
                 getPessoaTable("eleitor");
-                getPessoaTable("responsavel");
 
             });
 
@@ -457,7 +392,6 @@
                 data.datatermino = $('#datatermino').val();
                 data.candidato = votCandidato;
                 data.eleitor = votEleitor;
-                data.responsavel = votResponsavel;
                 
                 updateVotacao($update.id, data);
             });
@@ -494,7 +428,6 @@
                 });
                 data.candidato = idCandidato;
                 data.eleitor = idEleitor;
-                data.responsavel = idResponsavel;
                 //
                 updateVotacaoPessoa($update.id, data);
             });

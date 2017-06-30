@@ -79,7 +79,6 @@
             <ul class="tabs">
                 <li class="tab col s3" id="tabCandidato"><a href="#divCandidato">CANDIDATO</a></li>
                 <li class="tab col s3" id="tabEleitor"><a href="#divEleitor">ELEITOR</a></li>
-                <li class="tab col s3" id="tabResponsavel"><a href="#divResponsavel">RESPONSÁVEL</a></li>
             </ul>
 
             <div id="divCandidato">
@@ -176,54 +175,6 @@
                 </form>
             </div>
 
-            <div id="divResponsavel">
-
-                <form method="POST" name="responsavel_form" id="responsavel_form" novalidate="novalidate">
-                    <div class="card-content">
-                        <div class="row">
-                            <div class="col m6">
-                                <div class="table-header">
-
-                                    <div class="actions">
-                                        <input id="search-input-responsavel" type="text" class="search-header">
-                                        <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-                                    </div>
-                                </div>
-                                <table id="table-responsavel" class="search-page">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th> NOME </th>
-                                            <th> CPF </th>
-                                            <th> ADD </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                            <div class="col m6">
-                                <div class="table-header">
-                                    <div class="actions">
-                                        <input id="search-input-responsavel-selecionado" type="text" class="search-header">
-                                        <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-                                    </div>
-                                </div>
-                                <table id="responsavel-selecionado" class="search-page">
-                                    <thead>
-                                        <tr>
-                                            <th> NOME </th>
-                                            <th> CPF </th>
-                                            <th> DEL </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
             <div class="card-footer">
                 <div class="card-action">
                     <a class="btn-flat waves-effect" onclick='slideOut("#cardFirst", 1350, -800, more);'>Voltar</a>
@@ -259,7 +210,6 @@
 
             //Fill Table with Json
             getPessoaTable("candidato");
-            getPessoaTable("responsavel");
             getPessoaTable("eleitor");
 
             // #serch-input is a <input type="text"> element
@@ -287,11 +237,9 @@
 
                 var rowsCandidato = tblcandidatoselecionado.rows().data();
                 var rowsEleitor = tbleleitorselecionado.rows().data();
-                var rowsResponsavel = tblresponsavelselecionado.rows().data();
 
                 var idCandidato = new Array();
                 var idEleitor = new Array();
-                var idResponsavel = new Array();
 
                 $.each(rowsCandidato, function(i) {
                     idCandidato[i] = rowsCandidato[i].id;
@@ -301,13 +249,9 @@
                     idEleitor[i] = rowsEleitor[i].id;
                 });
 
-                $.each(rowsResponsavel, function(i) {
-                    idResponsavel[i] = rowsResponsavel[i].id;
-                });
                 data.candidato = idCandidato;
                 data.eleitor = idEleitor;
-                data.responsavel = idResponsavel;
-                //
+                
                 createVotacao(data);
             });
 
@@ -371,33 +315,9 @@
                 }
             });
 
-            //Table Responsavel Settings
-            tblresponsavelselecionado = $('table#responsavel-selecionado').DataTable({
-                columns: [{
-                    data: "nome"
-                }, {
-                    data: "cpf"
-                }, {
-                    data: null,
-                    render: function(data, type, full, meta) {
-                        return '<a href="#" class=" table-action btn-remove"><i class="material-icons red-text">remove</i></a>';
-                    },
-                }],
-                select: true,
-                responsive: true,
-                fixedColumns: true,
-                lengthChange: false,
-                pageLength: 5,
-                dom: 'lrti<"right"p>',
-                language: {
-                    url: "../../doc/Portuguese-Brasil.json"
-                }
-            });
-
-            //Adiciona e Deleta Tabela Candidato
+                 //Adiciona e Deleta Tabela Candidato
             var tblcandidato = $('table#table-candidato').DataTable();
             var tbleleitor = $('table#table-eleitor').DataTable();
-            var tblresponsavel = $('table#table-responsavel').DataTable();
 
 
             $('table#table-candidato').on('click', '.btn-add', function() {
@@ -434,22 +354,6 @@
                 qtdEleitor = tbleleitorselecionado.rows().count();
             });
 
-            //Adiciona e Deleta Tabela Responsável
-            $('table#table-responsavel').on('click', '.btn-add', function() {
-                var row = $(this).parents('tr');
-                var data = tblresponsavel.row(row).data();
-                tblresponsavelselecionado.row.add(data).draw(false);
-                tblresponsavel.row(row).remove().draw(false);
-                qtdResponsavel = tblresponsavelselecionado.rows().count();
-            });
-
-            $('table#responsavel-selecionado').on('click', '.btn-remove', function() {
-                var row = $(this).parents('tr');
-                var data = tblresponsavelselecionado.row(row).data();
-                tblresponsavel.row.add(data).draw(false);
-                tblresponsavelselecionado.row(row).remove().draw(false);
-                qtdResponsavel = tblresponsavelselecionado.rows().count();
-            });
 
         });
 

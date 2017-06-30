@@ -84,7 +84,7 @@ function createVotacao(data) {
 
     swal({
             title: "Deseja Cadastrar essa votação?",
-            text: "A votação tem:\nCANDIDATOS: " + qtdCandidato + "\nELEITORES: " + qtdEleitor + "\nRESPONSÁVEIS: " + qtdResponsavel,
+            text: "A votação tem:\nCANDIDATOS: " + qtdCandidato + "\nELEITORES: " + qtdEleitor,
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: '#DD6B55',
@@ -242,44 +242,71 @@ function updateVotacaoPessoa(id, data) {
     //    if (!$("#votacao_form_pessoa").valid()) {
 
     swal({
-        title: "Deseja salvar essas alterações?",
-        text: "A votação tem:\nCANDIDATOS: " + qtdCandidato + "\nELEITORES: " + qtdEleitor + "\nRESPONSÁVEIS: " + qtdResponsavel,
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Salvar",
-        closeOnConfirm: false,
-        html: false
-    },
-         function () {
+            title: "Deseja salvar essas alterações?",
+            text: "A votação tem:\nCANDIDATOS: " + qtdCandidato + "\nELEITORES: " + qtdEleitor + "\nRESPONSÁVEIS: " + qtdResponsavel,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Salvar",
+            closeOnConfirm: false,
+            html: false
+        },
+        function () {
 
-        $.ajax({
-            type: "PUT",
-            url: urlApi + "votacao/" + id,
-            data: JSON.stringify(data),
-            dataType: "json",
-            contentType: "application/json",
+            $.ajax({
+                type: "PUT",
+                url: urlApi + "votacao/" + id,
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: "application/json",
 
-            //if received a response from the server
-            success: function (response) {
-                swal("Pronto!",
-                    "As alterações foram salvas com sucesso.",
-                    "success");
+                //if received a response from the server
+                success: function (response) {
+                    swal("Pronto!",
+                        "As alterações foram salvas com sucesso.",
+                        "success");
 
-                //Reload dataTable
-                $('#table_votacao').DataTable().ajax.reload();
-                $('#modal-edit-pessoa').modal('close');
+                    //Reload dataTable
+                    $('#table_votacao').DataTable().ajax.reload();
+                    $('#modal-edit-pessoa').modal('close');
 
-            }
+                }
+
+            });
 
         });
-
-    });
 
     //    }
     //Reload Material Form
     Materialize.updateTextFields();
 
+}
+
+function addPessoaVotacao(id, pessoa) {
+    
+    console.log(id, pessoa);
+    $.ajax({
+        type: "PUT",
+        url: urlApi + "votacao/" + id + "/" + pessoa,
+        data: JSON.stringify(data),
+        dataType: "json",
+        contentType: "application/json",
+
+
+
+        //if received a response from the server
+        //            success: function (response) {
+        //                swal("Pronto!",
+        //                    "As alterações foram salvas com sucesso.",
+        //                    "success");
+        //
+        //                //Reload dataTable
+        //                $('#table_votacao').DataTable().ajax.reload();
+        //                $('#modal-edit-pessoa').modal('close');
+        //
+        //            }
+
+    });
 }
 
 //Delete function

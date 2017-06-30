@@ -52,14 +52,15 @@ $("#pessoa_form").validate({
 
 //Fill table pessoa
 function getPessoaTable(tipo) {
-    
+
 
     if (!!tipo) {
-        var url = urlApi + 'pessoa?' + tipo + '=true';
+//        var url = urlApi + 'pessoa?' + tipo + '=true';
+        var url = urlApi + 'pessoa?';
         var tabela = 'table#table-' + tipo + '';
-        
-        if ( $.fn.DataTable.fnIsDataTable(tabela) ) {
-//            console.log("já existe");
+
+        if ($.fn.DataTable.fnIsDataTable(tabela)) {
+            //            console.log("já existe");
         }
         //Populates Table with Json
 
@@ -385,7 +386,7 @@ function getPessoaTable(tipo) {
 
     } else {
         //Populates Table with Json
-        var table = $('table#table-pessoa').DataTable({
+        table = $('table#table-pessoa').DataTable({
             ajax: {
 
                 url: urlApi + "pessoa",
@@ -399,35 +400,6 @@ function getPessoaTable(tipo) {
                 }, {
                 data: "cpf",
                 width: "25%"
-                }, {
-                data: "candidato",
-                width: "15%",
-                render: function (data) {
-                    if (data == "true") {
-                        return '<i class="material-icons green-text">done</i>';
-                    } else {
-                        return '<i class="material-icons red-text">clear</i>';
-                    }
-                }
-            }, {
-                data: "eleitor",
-                width: "20%",
-                render: function (data) {
-                    if (data == "true") {
-                        return '<i class="material-icons green-text">done</i>';
-                    } else {
-                        return '<i class="material-icons red-text">clear</i>';
-                    }
-                }
-			}, {
-                data: "responsavel",
-                render: function (data) {
-                    if (data == "true") {
-                        return '<i class="material-icons green-text">done</i>';
-                    } else {
-                        return '<i class="material-icons red-text">clear</i>';
-                    }
-                }
 			}],
 
             select: true,
@@ -470,9 +442,7 @@ function getPessoa(id, inputType) {
                 $("#id").val(resp.data.id);
                 $("#nome").val(resp.data.nome);
                 $("#cpf").val(resp.data.cpf);
-                $('#candidato').prop('checked', JSON.parse(resp.data.candidato));
-                $('#eleitor').prop('checked', JSON.parse(resp.data.eleitor));
-                $('#responsavel').prop('checked', JSON.parse(resp.data.responsavel));
+                
             }
             //Reload Material Form
             Materialize.updateTextFields();
@@ -578,7 +548,6 @@ function updatePessoa(data) {
                 url: urlApi + "pessoa/" + data.id,
                 data: data,
                 dataType: "json",
-
 
                 //if received a response from the server
                 success: function (response) {
