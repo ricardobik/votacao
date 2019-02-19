@@ -233,7 +233,7 @@ function updateVeiculo(id, data) {
 
     }
     //Reload Material Form
-    Materialize.updateTextFields();
+    M.updateTextFields();
 
 }
 

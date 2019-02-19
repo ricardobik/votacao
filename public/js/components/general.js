@@ -4,9 +4,10 @@ var path = getUrl.pathname.split('/');
 var homeUrl = getUrl.protocol + "//" + getUrl.host + "/index.html";
 var searchUrl = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "/" + path[2] + "/search.html";
 var createUrl = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "/" + path[2] + "/create.html";
-var imageUrl = getUrl.protocol + "//" + getUrl.host + "/img/"; 
+var imageUrl = getUrl.protocol + "//" + getUrl.host + "/img/";
 
-var urlApi = "http://192.168.10.10:3004/"
+var urlApi = "http://10.10.0.114:8080/"
+// var urlApi = "http://10.10.15.10:8080/"
 
 // Validade default Fields materialize.css
 $.validator.setDefaults({
@@ -32,11 +33,11 @@ function resetForm($form) {
 
     $("input:text:first:visible").focus();
     $('select').prop('selectedIndex', 0);
-        
+
     $('select').material_select;
 
     //Reload Material Form
-    Materialize.updateTextFields();
+    M.updateTextFields();
 }
 
 function goHome() {
@@ -52,10 +53,10 @@ function goCreate() {
 }
 
 function goInfoVeiculo(div) {
-       
+
     //location.href = createUrl;
     location.href = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "/infoveiculo/create.html#" + div;
-    
+
     console.log(div);
 }
 
@@ -63,32 +64,6 @@ function goSetorCreate() {
     //location.href = createUrl;
     location.href = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "modules/setor/create.html";
 }
-
-$('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 200, // Creates a dropdown of 200 years to control year
-    format: 'dd/mm/yyyy',
-
-    // Languages
-    // Strings and translations
-    monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-    monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-    weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-    weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-    showMonthsShort: false,
-    showWeekdaysFull: false,
-
-    // Buttons
-    today: 'Hoje',
-    clear: 'Limpar',
-    close: 'Fechar',
-
-    // Accessibility labels
-    labelMonthNext: 'Próximo mês',
-    labelMonthPrev: 'Mês anterior',
-    labelMonthSelect: 'Selecione o mês',
-    labelYearSelect: 'Selecione o ano'
-});
 
 swal.setDefaults({
     confirmButtonText: "OK",
@@ -204,6 +179,6 @@ function getColumnIndexesWithClass( columns, className ) {
             indexes.push( index );
         }
     } );
- 
+
     return indexes;
 }

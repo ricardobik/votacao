@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import qunit.css-->
+  <link type="text/css" rel="stylesheet" href="https://code.jquery.com/qunit/qunit-git.css" media="screen,projection" />
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!--Import SweetAlert with google style-->
+  <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
+  <link rel="icon" href="../../img/car-icon/favicon.ico" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+  <!-- Import Navbar -->
+  <div id="nav-bar"></div>
+
+  <form method="POST" name="setor_form" action="" id="veiculo_form" novalidate="novalidate">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m8 offset-m2">
+          <div class="card-panel hide green lighten-4" id="result"></div>
+          <!-- Div with submit result -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Cadastrar Veículo</span>
+              <div class="row">
+                <div class="input-field col m4 s12">
+                  <input id="descricao" name="descricao" type="text" class="validate" required="" aria-required="true">
+                  <label class="active" for="descricao">Veículo</label>
+                </div>
+                <div class="input-field col m4 s12">
+                  <input id="prefixo" name="prefixo" type="text" class="validate" required="" aria-required="true">
+                  <label class="prefixo" for="prefixo">Prefixo</label>
+                </div>
+                <div class="input-field col m4 s12">
+                  <input id="placa" name="placa" type="text" class="validate" required="" aria-required="true">
+                  <label class="active" for="placa">Placa</label>
+                </div>
+              </div>
+            </div>
+            <div class="card-action right-align">
+              <a class="waves-effect waves-light btn" id="submit" name="submit"><i class="material-icons right">send</i>Cadastrar</a>
+              <a class="waves-effect waves-light btn" id="submit" name="submit"><i class="material-icons right">cancel</i>Cancelar</a>
+            </div>
+
+            <!--action button-->
+            <div class="fixed-action-btn horizontal">
+              <a class="btn-floating btn-large red">
+                <i class="large material-icons">add</i>
+              </a>
+              <ul>
+                <li><a href="javascripti:void(0)" onclick="javascript:goSearch(); return false;" class="btn-floating purple"><i class="material-icons">search</i></a></li>
+                <li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!--    <script type="text/javascript" src="/js/bin/materialize.min.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
+
+  <!--Import JUnit tests-->
+  <script type="text/javascript" src="https://code.jquery.com/qunit/qunit-2.1.1.js"></script>
+
+  <script type="text/javascript" src="/js/components/general.js"></script>
+  <script type="text/javascript" src="/js/components/veiculo.js"></script>
+
+  <script>
+    $(document).ready(function() {
+
+      //Load Navbar and dropdown menu
+      $('#nav-bar').load("/modules/layout/navbar.html", function() {
+        $(".dropdown-trigger").dropdown();
+        $("#brasao").attr("src", imageUrl + "brasao_branco.png");
+        $("#preview").attr("src", imageUrl + "avatar.png");
+      });
+
+      //get de form data and save
+      $("#submit").click(function(e) {
+        var data = new Object();
+        data.prefixo = $("#prefixo").val();
+        data.descricao = $("#descricao").val();
+        data.placa = $("#placa").val();
+        // console.log(JSON.stringify(data));
+        createVeiculo(JSON.stringify(data));
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel="icon" href="../../img/car-icon/favicon.ico" />
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import qunit.css-->
+  <link type="text/css" rel="stylesheet" href="https://code.jquery.com/qunit/qunit-git.css" media="screen,projection" />
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!--Import SweetAlert with google style-->
+  <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+  <!-- Import Navbar -->
+  <div id="nav-bar"></div>
+
+  <form method="POST" name="os_form" action="" id="os_form" novalidate="novalidate">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m12">
+          <div class="card-panel hide green lighten-4" id="result"></div>
+          <!-- Div with submit result -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Nova Ordem de Serviço</span>
+              <div class="row">
+                <div class="input-field col m1">
+                  <a class="btn-floating modal-trigger" id="escolherVeiculo" href="#modal-edit"><i class="material-icons">add</i></a>
+                </div>
+                <div class="input-field col m4 s12">
+                  <input id="descricao" name="descricao" type="text" class="validate" disabled="disabled" required="" aria-required="true">
+                  <label class="active" for="descricao">Veículo</label>
+                </div>
+                <div class="input-field col m3 s12">
+                  <input id="prisma" name="prisma" type="text" class="validate" required="" aria-required="true">
+                  <label class="active" for="prisma">Prisma</label>
+                </div>
+                <div class="input-field col m4 s12">
+                  <select id="status">
+                    <option value="" disabled selected>Escolha a opção</option>
+                    <option value="1">Aberta</option>
+                    <option value="2">Aguardando</option>
+                    <option value="3">Fechada</option>
+                  </select>
+                  <label>Status da O.S.</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col m3 s12">
+                  <input id="kmentrada" name="kmentrada" type="text" class="validate" required="" aria-required="true">
+                  <label class="active" for="kmentrada">Km de Entrada</label>
+                </div>
+                <div class="input-field col m3 s12">
+                  <input id="kmsaida" name="kmsaida" type="text" class="validate" required="" aria-required="true">
+                  <label class="active" for="kmsaida">Km de Saída</label>
+                </div>
+                <div class="input-field col m3 s12">
+                  <input id="nivelentrada" name="nivelentrada" type="text" class="validate" required="" aria-required="true">
+                  <label class="active" for="nivelentrada">Nivel de C. Entrada</label>
+                </div>
+                <div class="input-field col m3 s12">
+                  <input id="nivelsaida" name="nivelsaida" type="text" class="validate" required="" aria-required="true">
+                  <label class="active" for="nivelsaida">Nível de C. Saída</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col m12 s12">
+                  <select multiple id="tipo_serviço">
+                    <option value="Mecanica">Mecanica</option>
+                    <option value="Borracharia">Borracharia</option>
+                    <option value="Eletrica">Elétrica</option>
+                    <option value="Troca de Oleo">Troca de Óleo</option>
+                  </select>
+                  <label>Tipo de Serviço</label>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="input-field col m6 s12">
+                  <input id="mecanico" name="mecanico" type="text" class="validate" required="" aria-required="true">
+                  <label class="active" for="mecanico">Mecânico</label>
+                </div>
+                <div class="input-field col m6 s12">
+                  <input id="operador" name="operador" type="text" class="validate" required="" aria-required="true">
+                  <label class="active" for="operador">Operador</label>
+                </div>
+              </div>
+              <div class="divider"></div>
+              <h5 class="card-title">Detalhes:</h5>
+              <div class="detalhes">
+                <div class="row peças">
+                  <div class="input-field col m3 s6">
+                    <input id="peça" name="peça" type="text" class="validate peça" required="" aria-required="true">
+                    <label class="active" for="peça">Peça</label>
+                  </div>
+                  <div class="input-field col m2 s6">
+                    <input id="fornecedor" name="fornecedor" type="text" class="validate fornecedor" required="" aria-required="true">
+                    <label class="active" for="fornecedor">Fornecedor</label>
+                  </div>
+                  <div class="input-field col m2 s6">
+                    <input id="notafiscal" name="notafiscal" type="text" class="validate notafiscal" required="" aria-required="true">
+                    <label class="active" for="notafiscal">N° da N.F.</label>
+                  </div>
+                  <div class="input-field col m2 s6">
+                    <input id="pedido" name="pedido" type="text" class="validate pedido" required="" aria-required="true">
+                    <label class="active" for="pedido">N° do Pedido</label>
+                  </div>
+                  <div class="input-field col m2 s5">
+                    <input id="valor" name="valor" type="text" class="validate valor" required="" aria-required="true">
+                    <label class="active" for="valor">Valor</label>
+                  </div>
+                  <div class="input-field col m1 s1">
+                    <a class="btn-floating btn-large waves-effect waves-light red btn-small add_form_field"><i class="material-icons">add</i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-action right-align">
+              <a class="waves-effect waves-light btn" id="submit" name="submit"><i class="material-icons right">send</i>Cadastrar</a>
+              <a class="waves-effect waves-light btn" id="submit" name="submit"><i class="material-icons right">cancel</i>Cancelar</a>
+            </div>
+
+            <!--action button-->
+            <div class="fixed-action-btn horizontal">
+              <a class="btn-floating btn-large red">
+                <i class="large material-icons">add</i>
+              </a>
+              <ul>
+                <li><a href="javascripti:void(0)" onclick="javascript:goSearch(); return false;" class="btn-floating purple"><i class="material-icons">search</i></a></li>
+                <li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Modal Structure -->
+  <div id="modal-edit" class="modal modal-search">
+    <div class="modal-content">
+
+      <div class="table-header">
+        <span class="card-title">Pesquisar veículo</span>
+        <div class="actions input-field col m12">
+          <i class="material-icons prefix">search</i>
+          <input id="search-input" type="text" class="search-header">
+        </div>
+      </div>
+      <table id="table-veiculo" class="search-page table-veiculo"></table>
+      <div class="card-action right-align">
+        <!-- Modal Trigger -->
+        <!-- <a class="waves-effect waves-light btn disabled modal-trigger" name="callModalEdit" id="callModalEdit" href="#modal-edit">Detalhes</a> -->
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <div class="card-action right-align">
+        <div class="" id="divDelete">
+          <a href="#!" class="modal-action modal-close waves-effect btn-flat" id="back">Voltar</a>
+          <a href="#!" class="modal-action waves-effect btn disabled" id="escolher">Escolher</a>
+        </div>
+        <div class="hide" id="divEdit">
+          <a href="#!" class="modal-action waves-effect  tn-flat" id="update">Salvar</a>
+          <a href="#!" class="modal-action waves-effect btn-flat modal-close" id="cancel">Cancelar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+  <!--Import JUnit tests-->
+  <script type="text/javascript" src="https://code.jquery.com/qunit/qunit-2.1.1.js"></script>
+  <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
+  <script type="text/javascript" src="/js/components/general.js"></script>
+  <script type="text/javascript" src="/js/components/os.js"></script>
+  <script type="text/javascript" src="/js/components/veiculo.js"></script>
+
+  <script>
+    $(document).ready(function() {
+
+      var $update;
+
+      $('select').formSelect();
+      $('.modal').modal();
+
+      //Fill Table with Json
+      getVeiculoTable();
+
+      //Enable edit button and set id
+      $('.search-page tbody').on('click', 'tr', function() {
+        if ($(this).hasClass('selected')) {
+          $(this).removeClass('selected');
+          $('#escolher').addClass('disabled');
+        } else {
+          table.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
+          $('#escolher').removeClass('disabled');
+          $update = table.row(this).data();
+        }
+      });
+
+      //Get id from json and populate the modal field
+      $('#callModalEdit').on('click', function() {
+        // $("#divDelete").removeClass("hide");
+        $("#escolher").addClass("disabled");
+        $("form :input").prop("disabled", true);
+
+        getVeiculo($update.id);
+      });
+
+      //Get id from json and populate the modal field
+      $('#escolher').on('click', function() {
+        // $("#divDelete").removeClass("hide");
+        // $("#divEdit").addClass("hide");
+        // $("form :input").prop("disabled", true);
+        $('#modal-edit').modal('close');
+        getVeiculo($update.id);
+      });
+
+      // #serch-input is a <input type="text"> element
+      $('#search-input').on('keyup', function() {
+        table.search(this.value).draw();
+      });
+
+      //Load Navbar and dropdown menu
+      $('#nav-bar').load("/modules/layout/navbar.html", function() {
+        $(".dropdown-trigger").dropdown();
+        $("#brasao").attr("src", imageUrl + "brasao_branco.png");
+        $("#preview").attr("src", imageUrl + "avatar.png");
+      });
+
+      //get de form data and save
+      $("#submit").click(function(e) {
+        var data = new Object();
+
+        data.veiculoId = $update.id;
+        data.prisma = $("#prisma").val();
+        data.status = $("#status").val();
+        data.kmentrada = $("#kmentrada").val();
+        data.kmsaida = $("#kmsaida").val();
+        data.nivelentrada = $("#nivelentrada").val();
+        data.nivelsaida = $("#nivelsaida").val();
+        data.tipo_serviço = $('#tipo_serviço').val();
+        data.mecanico = $('#mecanico').val();
+        data.operador = $('#operador').val();
+
+        var peças = [];
+        $('.detalhes').children(".row .peças").each(function() {
+          var info = $(this).children("div");
+          var detalhe = {};
+          detalhe.peça = info.children("input.peça").val();
+          detalhe.fornecedor = info.children("input.fornecedor").val();
+          detalhe.notafiscal = info.children("input.notafiscal").val();
+          detalhe.pedido = info.children("input.pedido").val();
+          detalhe.valor = info.children("input.valor").val();
+
+          peças.push(detalhe);
+        });
+        data.peças = peças;
+console.log(data);
+        createOs(data);
+      });
+
+      var max_fields = 10;
+      var wrapper = $(".detalhes");
+      var add_button = $(".add_form_field");
+      var x = 1;
+
+      $(add_button).click(function(e) {
+        e.preventDefault();
+        if (x < max_fields) {
+          x++;
+          var text = (
+            '<div class="row peças" id="line' + (x) + '">' +
+            '<div class="input-field col m3 s6"><input id="peça' + (x) + '" name="peça' + (x) + '" type="text" class="peça"><label class="active" for="peça' + (x) + '">Peça ' + x + '</label></div>' +
+            '<div class="input-field col m2 s6"><input id="fornecedor' + (x) + '" name="fornecedor' + (x) + '" type="text" class="fornecedor"><label class="active" for="fornecedor' + (x) + '">Fornecedor</label></div>' +
+            '<div class="input-field col m2 s6"><input id="notafiscal' + (x) + '" name="notafiscal' + (x) + '" type="text" class="notafiscal"><label class="active" for="notafiscal' + (x) + '">N° da N.F.</label></div>' +
+            '<div class="input-field col m2 s6"><input id="pedido' + (x) + '" name="pedido' + (x) + '" type="text" class="pedido"><label class="active" for="pedido' + (x) + '">N° do Pedido</label></div>' +
+            '<div class="input-field col m2 s5"><input id="valor' + (x) + '" name="valor' + (x) + '" type="text" class="valor"><label class="active" for="valor' + (x) + '">Valor</label></div>' +
+            '<div class="input-field col m1 s1"><a class="btn-floating btn-large waves-effect waves-light red btn-small delete_form_field"><i class="material-icons">delete</i></a></div>' +
+            '</div>'
+          );
+          // $(wrapper).append($(".toAdd")); //add input box
+          $(wrapper).append(text)
+          M.updateTextFields();
+
+        } else {
+          alert('Você atingiu o limite de peças')
+        }
+      });
+
+      $(wrapper).on("click", ".delete_form_field", function(e) {
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove();
+        x--;
+      });
+
+      $('#tipo_serviço').change(function() {
+        console.log($('#tipo_serviço').val());
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

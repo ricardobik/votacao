@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import qunit.css-->
+  <link type="text/css" rel="stylesheet" href="https://code.jquery.com/qunit/qunit-git.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!--Import Datatables-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.min.css" />
+
+
+  <!--Import SweetAlert with google style-->
+  <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
+  <link rel="icon" href="../../img/car-icon/favicon.ico" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+  <!-- Import Navbar -->
+  <div id="nav-bar"></div>
+
+  <form method="POST" name="setor_form" action="" id="veiculo_form" novalidate="novalidate">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m10 offset-m1">
+          <div class="card-panel hide green lighten-4" id="result"></div>
+          <!-- Div with submit result -->
+          <div class="card">
+            <div class="card-content">
+              <div class="table-header">
+                <span class="card-title">Pesquisar veículo</span>
+                <div class="actions input-field col m12">
+                  <i class="material-icons prefix">search</i>
+                  <input id="search-input" type="text" class="search-header">
+                </div>
+              </div>
+              <table id="table-veiculo" class="search-page"></table>
+            </div>
+            <div class="card-action right-align">
+              <!-- Modal Trigger -->
+              <a class="waves-effect waves-light btn disabled modal-trigger" name="callModalEdit" id="callModalEdit" href="#modal-edit">Detalhes</a>
+            </div>
+
+            <!-- Modal Structure -->
+            <form method="POST" name="veiculo_form" action="" id="veiculo_form">
+                <div id="modal-edit" class="modal modal-edit">
+                <div class="modal-content">
+                  <span class="card-title">Editar Veículo</span>
+                  <div class="row">
+                    <div class="input-field col m4 s12">
+                      <input id="descricao" name="descricao" type="text" class="validate" required="" aria-required="true">
+                      <label class="active" for="descricao">Veículo</label>
+                    </div>
+                    <div class="input-field col m4 s12">
+                      <input id="prefixo" name="prefixo" type="text" class="validate" required="" aria-required="true">
+                      <label class="prefixo" for="prefixo">Prefixo</label>
+                    </div>
+                    <div class="input-field col m4 s12">
+                      <input id="placa" name="placa" type="text" class="validate" required="" aria-required="true">
+                      <label class="active" for="placa">Placa</label>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <div class="card-action right-align">
+                    <div class="" id="divDelete">
+                      <a href="#!" class="modal-action modal-close waves-effect btn-flat" id="back">Voltar</a>
+                      <a href="#!" class="modal-action waves-effect btn-flat" id="delete">Deletar</a>
+                      <a href="#!" class="modal-action waves-effect btn-flat" id="edit">Editar</a>
+                    </div>
+                    <div class="hide" id="divEdit">
+                      <a href="#!" class="modal-action waves-effect  tn-flat" id="update">Salvar</a>
+                      <a href="#!" class="modal-action waves-effect btn-flat modal-close" id="cancel">Cancelar</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+                <!--action button-->
+            <div class="fixed-action-btn horizontal">
+              <a class="btn-floating btn-large red">
+                <i class="large material-icons">add</i>
+              </a>
+              <ul>
+                <li><a href="javascripti:void(0)" onclick="javascript:goSearch(); return false;" class="btn-floating purple"><i class="material-icons">search</i></a></li>
+                <li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!--Import DataTables-->
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
+
+  <!--Import JUnit tests-->
+  <!-- <script type="text/javascript" src="https://code.jquery.com/qunit/qunit-2.1.1.js"></script> -->
+
+  <script type="text/javascript" src="/js/components/general.js"></script>
+  <script type="text/javascript" src="/js/components/veiculo.js"></script>
+
+  <script>
+    $(document).ready(function() {
+
+      var $update;
+
+      //Call modal form
+      $('.modal').modal();
+
+      // #serch-input is a <input type="text"> element
+      $('#search-input').on('keyup', function() {
+        table.search(this.value).draw();
+      });
+
+      // Load Navbar and dropdown menu
+      $('#nav-bar').load("/modules/layout/navbar.html", function() {
+        $(".dropdown-trigger").dropdown();
+        $("#brasao").attr("src", imageUrl + "brasao_branco.png");
+        $("#preview").attr("src", imageUrl + "avatar.png");
+      });
+
+      var $update;
+
+      //Fill Table with Json
+      getVeiculoTable();
+
+      //Enable edit button and set id
+      $('.search-page tbody').on('click', 'tr', function() {
+        if ($(this).hasClass('selected')) {
+          $(this).removeClass('selected');
+          $('#callModalEdit').addClass('disabled');
+        } else {
+          table.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
+          $('#callModalEdit').removeClass('disabled');
+          $update = table.row(this).data();
+        }
+      });
+
+      //Get id from json and populate the modal field
+      $('#callModalEdit').on('click', function() {
+        $("#divDelete").removeClass("hide");
+        $("#divEdit").addClass("hide");
+        $("form :input").prop("disabled", true);
+
+        getVeiculo($update.id);
+      });
+
+      $('#edit').on('click', function() {
+        $("#divDelete").addClass("hide");
+        $("#divEdit").removeClass("hide");
+        $("form :input").prop("disabled", false);
+        $("#id").prop("disabled", true)
+
+        //Reload Material Form
+        M.updateTextFields();
+      });
+
+      //Update request
+      $("#update").click(function(e) {
+        var data = new Object();
+        data.id = $update.id;
+        data.descricao = $("#descricao").val();
+        data.prefixo = $("#prefixo").val();
+        data.placa = $("#placa").val();
+        updateVeiculo(data);
+      });
+
+      //Delete request
+      $('#delete').on('click', function() {
+        deleteVeiculo($update.id);
+      });
+
+      //Cancel request
+      $('#cancel').on('click', function() {
+        resetForm($("#veiculo_form"));
+        $("#veiculo_form").validate().resetForm();
+      });
+
+      //Back request
+      $('#back').on('click', function() {
+        resetForm($("#veiculo_form"));
+        $("#veiculo_form").validate().resetForm();
+      });
+    });
+  </script>
+
+</body>
+
+</html>

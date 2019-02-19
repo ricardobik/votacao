@@ -1,86 +1,31 @@
-//Rules and Messages to Validate
-$("#setor_form").validate({
-    rules: {
-        nome: {
-            required: true,
-            minlength: 3
-        },
-        setorNome: {
-            required: true,
-            minlength: 3
-        }
-    },
-    messages: {
-        nome: {
-            required: "Preencha com o nome do novo setor",
-            minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
-
-        },
-        setorNome: {
-            required: "Preencha com o nome do novo setor",
-            minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
-
-        }
-    }
-});
-
-//Fill table setor
-function getSetorTable() {
-
-    //Populates Table with Json
-    table = $('table#table-setor').DataTable({
-        ajax: {
-            url: urlApi + "setor",
-            contentType: 'application/json; charset=UTF-8',
-            dataType: 'json'
-            
-        },
-        columns: [{
-            data: "id"
-                }, {
-            data: "nome"
-                }],
-        "columnDefs": [{
-            "width": "20%",
-            "targets": 0
-                }],
-        select: true,
-        fixedColumns: true,
-        lengthChange: false,
-        pageLength: 5,
-        dom: 'lrti<"right"p>',
-        language: {
-            url: "../../doc/Portuguese-Brasil.json"
-        }
-    });
-}
-
 //Fill input to update
-function getSetor(id, inputType) {
-    //    $('#setor-form').empty();
+function getOs(id, inputType) {
+    //    $('#pessoa-form').empty();
 
     $.ajax({
         type: "GET",
-        url: urlApi + "setor/" + id,
+        url: urlApi + "os/" + id,
         dataType: "json",
 
         //if received a response from the server
         success: function (resp) {
 
             if (inputType == "select") {
-                $("#setor").append(
+                $("#os").append(
                     $("<option></option>")
                     .attr('value', resp.data.id)
                     .text(resp.data.nome)
                     .prop('selected', true)
 
                 );
-                $("#setor").material_select();
+                $("#os").material_select();
 
             } else {
 
-                $("#id").val(resp.data.id);
-                $("#nome").val(resp.data.nome);
+                $("#placa").val(resp.data.placa);
+                $("#prisma").val(resp.data.prisma);
+                $("#cpf").val(resp.data.cpf);
+
             }
             //Reload Material Form
             Materialize.updateTextFields();
@@ -92,10 +37,10 @@ function getSetor(id, inputType) {
 };
 
 //Delete function
-function deleteSetor(id) {
+function deletePessoa(id) {
     swal({
             title: "Tem certeza?",
-            text: "Esta ação excluirá o setor!",
+            text: "Esta ação excluirá a pessoa!",
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: 'btn-danger',
@@ -109,19 +54,19 @@ function deleteSetor(id) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: urlApi + "setor/" + id,
+                    url: urlApi + "pessoa/" + id,
                     dataType: "json",
 
                     //if received a response from the server
                     success: function (response) {
                         //Reload dataTable
-                        $('#table-setor').DataTable().ajax.reload();
+                        $('#table-pessoa').DataTable().ajax.reload();
                         $('#modal-edit').modal('close');
                     },
 
                 });
 
-                swal("Excluído!", "O setor foi excluído!", "success");
+                swal("Excluído!", "Pessoa excluída!", "success");
             } else {
                 swal("Cancelado", "Nada foi modificado", "error");
                 $('#modal-edit').modal('close');
@@ -131,24 +76,23 @@ function deleteSetor(id) {
 };
 
 //Create function
-function createSetor(data) {
-
+function createOs(data) {
     //make AJAX request
-    validator = $("#setor_form").validate();
-    if ($("#setor_form").valid()) {
+    // validator = $("#os_form").validate();
+    if ($("#os_form").valid()) {
         $.ajax({
             type: "POST",
-            url: urlApi + "setor",
+            url: urlApi + "os",
             data: data,
             dataType: "json",
 
             //if received a response from the server
             success: function (response) {
                 swal("Pronto!",
-                    "Setor gravado com sucesso.",
+                    "Os gravada com sucesso.",
                     "success");
 
-                resetForm($("#setor_form"));
+                resetForm($("#os_form"));
                 validator.resetForm();
 
             },
@@ -160,16 +104,16 @@ function createSetor(data) {
 
     }
     //Reload Material Form
-    Materialize.updateTextFields();
+    M.updateTextFields();
 
 };
 
 //Update function
-function updateSetor(data) {
+function updatePessoa(data) {
 
     //do AJAX request
-    validator = $("#setor_form").validate();
-    if ($("#setor_form").valid()) {
+    validator = $("#pessoa_form").validate();
+    if ($("#pessoa_form").valid()) {
 
         swal({
             title: "Confirmação",
@@ -184,7 +128,7 @@ function updateSetor(data) {
 
             $.ajax({
                 type: "PUT",
-                url: urlApi + "setor/" + data.id,
+                url: urlApi + "pessoa/" + data.id,
                 data: data,
                 dataType: "json",
 
@@ -195,7 +139,7 @@ function updateSetor(data) {
                         "success");
 
                     //Reload dataTable
-                    $('#table-setor').DataTable().ajax.reload();
+                    $('#table-pessoa').DataTable().ajax.reload();
                     validator.resetForm();
                     $('#modal-edit').modal('close');
 
@@ -211,35 +155,35 @@ function updateSetor(data) {
 
 };
 
-//Get Setores to fill a select
-function getSetores(id) {
+//Get pessoaes to fill a select
+function getPessoas(id) {
 
     if (id == "null") {
-        $('#setor').children().remove().end().append('<option value="" disable selected>Selecione o setor</option>');
+        $('#pessoa').children().remove().end().append('<option value="" disable selected>Selecione o usuário</option>');
     }
-    
-    //Load Json setor
+
+    //Load Json pessoa
     $.ajax({
-        url: urlApi + "setor",
+        url: urlApi + "pessoa",
         type: 'GET',
         dataType: 'json',
         success: function (resp) {
 
             $.each(resp.data, function (key, value) {
 
-                $('#setor').append(
+                $('#pessoa').append(
                     $("<option></option>")
                     .attr('value', value.id)
-                    .text(value.nome)
+                    .text(value.pessoa)
                 );
 
             });
 
             if (id !== "null") {
-                $('#setor').find('option[value="' + id + '"]').prop('selected', true);
+                $('#pessoa').find('option[value="' + id + '"]').prop('selected', true);
             }
 
-            $('#setor').material_select();
+            $('#pessoa').material_select();
 
             //Reload Material Form
             Materialize.updateTextFields();
@@ -247,5 +191,3 @@ function getSetores(id) {
     });
 
 };
- 
-
